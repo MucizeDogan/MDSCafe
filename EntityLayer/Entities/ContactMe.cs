@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EntityLayer.Entities {
-    public class ContactUs {
+    public class ContactMe {
         public int ContactUsID { get; set; }
         public string Location { get; set; }
         public string Phone { get; set; }
