@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Entities {
     public class ContactMe {
-        public int ContactUsID { get; set; }
+        public int ContactMeID { get; set; }
         public string Location { get; set; }
         public string Phone { get; set; }
         public string Mail { get; set; }
