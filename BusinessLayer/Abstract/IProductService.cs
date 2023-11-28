@@ -6,6 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract {
-    public interface IFeatureDal : IGenericService<Feature> {
+    public interface IProductService : IGenericService<Product> {
     }
 }
