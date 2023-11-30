@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DtoLayer.CategoryDto {
-    public class CreateBookingDto {
+    public class CreateCategoryDto {
         public string CategoryName { get; set; }
         public bool Status { get; set; }
     }
