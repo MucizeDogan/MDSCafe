@@ -19,6 +19,24 @@ builder.Services.AddScoped<IBookingDal, EfBookingDal>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddScoped<ICategoryDal, EfCategoryDal>();
 
+builder.Services.AddScoped<IContactMeService, ContactMeManager>();
+builder.Services.AddScoped<IContactMeDal, EfContactMeDal>();
+
+builder.Services.AddScoped<IDiscountService, DiscountManager>();
+builder.Services.AddScoped<IDiscountDal, EfDiscountDal>();
+
+builder.Services.AddScoped<IFeatureService, FeatureManager>();
+builder.Services.AddScoped<IFeatureDal, EfFeatureDal>();
+
+builder.Services.AddScoped<IProductService, ProductManager>();
+builder.Services.AddScoped<IProductDal, EfProductDal>();
+
+builder.Services.AddScoped<ISocialMediaService, SocialMediaManager>();
+builder.Services.AddScoped<ISocialMediaDal, EfSocialMediaDal>();
+
+builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
+builder.Services.AddScoped<ITestimonialDal, EfTestimonialDal>();
+
 // Add services to the container.
 
 builder.Services.AddControllers();

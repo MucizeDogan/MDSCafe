@@ -17,23 +17,23 @@ namespace BusinessLayer.Concrete {
         }
 
         public void TAdd(Discount entity) {
-            throw new NotImplementedException();
+            _discountDal.Add(entity);
         }
 
         public void TDelete(Discount entity) {
-            throw new NotImplementedException();
+            _discountDal.Delete(entity);
         }
 
         public Discount TGetById(int id) {
-            throw new NotImplementedException();
+            return _discountDal.GetById(id);
         }
 
         public List<Discount> TGetListAll() {
-            throw new NotImplementedException();
+            return _discountDal.GetListAll();
         }
 
         public void TUpdate(Discount entity) {
-            throw new NotImplementedException();
+            _discountDal.Update(entity);
         }
     }
 }
