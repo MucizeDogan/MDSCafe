@@ -17,6 +17,7 @@ namespace DataAccessLayer.Concrete {
         public DbSet<ContactMe> ContactMes{ get; set; }
         public DbSet<Discount> Discounts{ get; set; }
         public DbSet<Feature> Features{ get; set; }
+        public DbSet<Product> Products{ get; set; }
         public DbSet<SocialMedia> SocialMedias{ get; set; }
         public DbSet<Testimonial> Testimonials{ get; set; }
     }
