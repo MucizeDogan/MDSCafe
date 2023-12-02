@@ -23,6 +23,12 @@ namespace Api.Controllers {
             return Ok(values);
         }
 
+        [HttpGet("ListProductWithCategory")]
+        public IActionResult ListProductWithCategory() {
+            var values = _mapper.Map<List<ResultProductWithCategory>>(_productService.TGetProductsWithCategories());
+            return Ok(values);
+        }
+
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto) {
 
