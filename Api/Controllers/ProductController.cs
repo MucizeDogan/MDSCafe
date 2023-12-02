@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using DtoLayer.PoductDto;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.Controllers {
     [Route("api/[controller]")]
@@ -25,8 +27,20 @@ namespace Api.Controllers {
 
         [HttpGet("ListProductWithCategory")]
         public IActionResult ListProductWithCategory() {
-            var values = _mapper.Map<List<ResultProductWithCategory>>(_productService.TGetProductsWithCategories());
-            return Ok(values);
+            //var values = _mapper.Map<List<ResultProductWithCategory>>(_productService.TGetProductsWithCategories());
+            //return Ok(values);
+
+            var context = new Context();
+            var values = context.Products.Include(x => x.Category).Select(y => new ResultProductWithCategory {
+                Description = y.Description,
+                ImageUrl = y.ImageUrl,
+                Price = y.Price,
+                ProductName = y.ProductName,
+                ProductID = y.ProductID,
+                ProductStatus = y.ProductStatus,
+                CategoryName = y.Category.CategoryName
+            });
+            return Ok(values.ToList());
         }
 
         [HttpPost]
