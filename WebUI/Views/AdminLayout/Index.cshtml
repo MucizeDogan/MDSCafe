@@ -3,8 +3,22 @@
     Layout = null;
 }
 
-<h1>Burası Layout</h1>
-
-<br />
+<!DOCTYPE html>
+<html>
 @await Component.InvokeAsync("_LayoutHeaderPartialComponent")
-@RenderBody()
+<body>
+	<div class="wrapper">
+		@await Component.InvokeAsync("_LayoutNavBarPartialComponent")
+
+		@await Component.InvokeAsync("_LayoutSideBarPartialComponent")
+			
+			<div class="main-panel">
+				@RenderBody()
+
+				@await Component.InvokeAsync("_LayoutFooterPartialComponent")
+			</div>
+		</div>
+</body>
+@await Component.InvokeAsync("_LayoutScriptPartialComponent")
+</html>
+
