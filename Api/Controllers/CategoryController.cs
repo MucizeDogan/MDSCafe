@@ -49,7 +49,7 @@ namespace Api.Controllers {
             return Ok("Kategori başarıyla güncellendi");
         }
 
-        [HttpGet("GetCategory")]
+        [HttpGet("{id}")]
         public IActionResult GetCategory(int id) {
             var value = _categoryService.TGetById(id);
             return Ok(value);

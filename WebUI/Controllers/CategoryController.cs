@@ -47,5 +47,29 @@ namespace WebUI.Controllers {
             }
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateCategory(int id) {
+            var client = _httpClientFactory.CreateClient();
+            var res = await client.GetAsync($"https://localhost:7052/api/Category/{id}");
+            if (!res.IsSuccessStatusCode) {
+                return View();
+            }
+            var jsonData = await res.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<UpdateCategoryDto>(jsonData);
+            return View(values);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategoryDto) {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(updateCategoryDto);
+            StringContent stringContent = new StringContent(jsonData,Encoding.UTF8,"application/json");
+            var res = await client.PutAsync("https://localhost:7052/api/Category/", stringContent);
+            if (!res.IsSuccessStatusCode) {
+                return View();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
