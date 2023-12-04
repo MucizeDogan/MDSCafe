@@ -32,7 +32,7 @@ namespace Api.Controllers {
             return Ok("Kategori başarılı bir şekilde eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id) {
             var value = _categoryService.TGetById(id);
             _categoryService.TDelete(value);
