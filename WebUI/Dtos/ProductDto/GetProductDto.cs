@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DtoLayer.PoductDto {
-    public class UpdateProductDto {
+﻿namespace WebUI.Dtos.ProductDto {
+    public class GetProductDto {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public string Description { get; set; }

@@ -56,7 +56,7 @@ namespace Api.Controllers {
             return Ok("Başarıyla eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id) {
             var value = _productService.TGetById(id);
             _productService.TDelete(value);
