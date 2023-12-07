@@ -52,6 +52,7 @@ namespace Api.Controllers {
                 Price = createProductDto.Price,
                 ProductName = createProductDto.ProductName,
                 ProductStatus = createProductDto.ProductStatus,
+                CategoryID=createProductDto.CategoryID
             });
             return Ok("Başarıyla eklendi");
         }
@@ -72,11 +73,12 @@ namespace Api.Controllers {
                 Price = updateProductDto.Price,
                 ProductName = updateProductDto.ProductName,
                 ProductStatus = updateProductDto.ProductStatus,
+                CategoryID = updateProductDto.CategoryID
             });
             return Ok("Başarıyla güncellendi");
         }
 
-        [HttpGet("GetProduct")]
+        [HttpGet("{id}")]
         public IActionResult GetProduct(int id) {
             var value = _productService.TGetById(id);
             return Ok(value);

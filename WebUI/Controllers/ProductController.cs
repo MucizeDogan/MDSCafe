@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Text;
+using WebUI.Dtos.CategoryDto;
 using WebUI.Dtos.ProductDto;
 
 namespace WebUI.Controllers {
@@ -23,7 +25,17 @@ namespace WebUI.Controllers {
         }
 
         [HttpGet]
-        public IActionResult CreateProduct() {
+        public async Task< IActionResult > CreateProduct() {
+            var client = _httpClientFactory.CreateClient();
+            var res = await client.GetAsync("https://localhost:7052/api/Category");
+            var jsonData = await res.Content.ReadAsStringAsync();
+            var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
+            List<SelectListItem> values2 = (from x in values    //values den al
+                                            select new SelectListItem { //Ürün ekleme kısmında kategori seçtirmek için 
+                                                Text = x.CategoryName,
+                                                Value = x.CategoryID.ToString()
+                                            }).ToList();
+            ViewBag.v = values2; //Değerleri taşımak için
             return View();
         }
         [HttpPost]
@@ -50,6 +62,17 @@ namespace WebUI.Controllers {
 
         [HttpGet]
         public async Task<IActionResult> UpdateProduct(int id) {
+            var client2 = _httpClientFactory.CreateClient();
+            var res2 = await client2.GetAsync("https://localhost:7052/api/Category");
+            var jsonData2 = await res2.Content.ReadAsStringAsync();
+            var values2 = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData2);
+            List<SelectListItem> values2_1 = (from x in values2   //values den al
+                                            select new SelectListItem { //Ürün ekleme kısmında kategori seçtirmek için 
+                                                Text = x.CategoryName,
+                                                Value = x.CategoryID.ToString()
+                                            }).ToList();
+            ViewBag.v = values2_1; //Değerleri taşımak için
+
             var client = _httpClientFactory.CreateClient();
             var res = await client.GetAsync($"https://localhost:7052/api/Product/{id}");
             if (!res.IsSuccessStatusCode) {
