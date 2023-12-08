@@ -31,7 +31,7 @@ namespace Api.Controllers {
             return Ok("Hakkımızda kısmı başarılı bir şekilde eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteAbout(int id) {
             var value = _aboutService.TGetById(id);
             _aboutService.TDelete(value);
@@ -50,7 +50,7 @@ namespace Api.Controllers {
             return Ok("Hakkımızda alanı başarıyla güncellendi");
         }
 
-        [HttpGet("GetAbout")]
+        [HttpGet("{id}")]
         public IActionResult GetAbout(int id) {
             var value = _aboutService.TGetById(id);
             return Ok(value);
