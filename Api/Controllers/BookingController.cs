@@ -34,7 +34,7 @@ namespace Api.Controllers {
             return Ok("Rezervasyon yapıldı");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteBooking(int id) {
             var value = _bookingService.TGetById(id);
             _bookingService.TDelete(value);
@@ -48,13 +48,14 @@ namespace Api.Controllers {
                 Mail = updateBookingDto.Mail,
                 Date = updateBookingDto.Date,
                 Name = updateBookingDto.Name,
-                Phone = updateBookingDto.Phone
+                Phone = updateBookingDto.Phone,
+                PersonCount=updateBookingDto.PersonCount
             };
             _bookingService.TUpdate(booking);
             return Ok("Rezervasyon güncellendi");
         }
 
-        [HttpGet("GetBooking")]
+        [HttpGet("{id}")]
         public IActionResult GetBooking(int id) {
             var value = _bookingService.TGetById(id);
             return Ok(value);

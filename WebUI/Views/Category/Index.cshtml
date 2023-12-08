@@ -33,8 +33,9 @@
                                         <td>@item.CategoryID</td>
                                         <td>@item.CategoryName</td>
                                         <td>@item.Status</td>
-                                        <td><a href="/Category/DeleteCategory/@item.CategoryID" class="btn btn-outline-danger">Sil</a></td>
-                                        <td><a href="/Category/UpdateCategory/@item.CategoryID" class="btn btn-outline-warning">Güncelle</a></td>
+                                        <td><a href="/Category/DeleteCategory/@item.CategoryID" class="btn btn-outline-danger btn-rounded"
+                                        onclick="return confirm('@item.CategoryName bu Kategoriyi silmek istediğinize emin misiniz?')">Sil</a></td>
+                                        <td><a href="/Category/UpdateCategory/@item.CategoryID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
                                     </tr>
                                 }
                             </tbody>
