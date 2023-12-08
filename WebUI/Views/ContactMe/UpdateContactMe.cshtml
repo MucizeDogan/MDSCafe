@@ -1,0 +1,50 @@
+﻿@model UpdateContactMeDto
+@{
+    ViewData["Title"] = "UpdateContactMe";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Ana Sayfa Alt İletişim İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">İletişim Bilgisi Güncelleme</div>
+                        </div>
+                        <input type="hidden" asp-for="ContactMeID" />
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="Location">Adres</label>
+                                <input type="text" class="form-control" asp-for="Location" id="Title" placeholder="Location">
+                            </div>
+                        </div>
+                         <div class="card-body">
+                            <div class="form-group">
+                                <label for="Phone">Telefon Numarası</label>
+                                <input type="number" class="form-control" asp-for="Phone" id="Phone">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="Mail">Mail</label>
+                                <input type="email" class="form-control" asp-for="Mail" id="Mail">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="FooterDescription">Alt Açıklama</label>
+                                <textarea rows="4" class="form-control" asp-for="FooterDescription" placeholder="Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-primary">Güncelle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
