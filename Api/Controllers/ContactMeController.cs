@@ -35,7 +35,7 @@ namespace Api.Controllers {
             return Ok("Başarıyla eklendi");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteContactMe(int id) {
             var value = _contactMeService.TGetById(id);
             _contactMeService.TDelete(value);
@@ -54,7 +54,7 @@ namespace Api.Controllers {
             return Ok("Başarıyla güncellendi");
         }
 
-        [HttpGet("GetContactMe")]
+        [HttpGet("{id}")]
         public IActionResult GetContactMe(int id) { 
             var value = _contactMeService.TGetById(id);
             return Ok(value);
