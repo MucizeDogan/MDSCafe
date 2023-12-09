@@ -1,3 +1,4 @@
+using Api.Hubs;
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
 using DataAccessLayer.Abstract;
@@ -6,6 +7,17 @@ using DataAccessLayer.EntityFramework;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(opt => {
+    opt.AddPolicy("CorsPolicy", builder => {
+        builder.AllowAnyHeader()
+        .AllowAnyMethod()
+        .SetIsOriginAllowed((host) => true)
+        .AllowCredentials();
+    });
+});
+builder.Services.AddSignalR();
+
 
 builder.Services.AddDbContext<Context>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -51,6 +63,10 @@ if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("CorsPolicy");
+
+app.MapHub<SignalRHub>("/signalrhub");
 
 app.UseHttpsRedirection();
 
