@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.SignalR;
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index2";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
@@ -17,15 +17,21 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
+
                         <script type="text/javascript">
+
                             $(document).ready(() => {
+
                                 var conn = new signalR.HubConnectionBuilder().withUrl("https://localhost:7052/SignalRHub").build();
                                 $("#connstatus").text(conn.state);
 
                                 conn.start().then(() => {
                                     $("#connstatus").text(conn.state);
+                                    //Set Interval metodu bizim sayfayı yenilemeden verilerimizin güncellemesini sağlayacak
+                                    setInterval(() => { // SetInterval metodu bir aralık ayarlayacak, Bağlantıyı belli periyotlara düşürecek
+                                        conn.invoke("SendCategoryCount"); //Conn.inoke ile SendCategoryCount metoduna istekte bulunduk 
 
-                                    conn.invoke("SendCategoryCount"); //Conn.inoke ile SendCategoryCount metoduna istekte bulunduk 
+                                    }, 1000);   //Her 1 saniyede bir istekte bulunacak
 
                                 }).catch((err) => { console.log(err) });
 
@@ -33,6 +39,7 @@
                                     $("#categorycount").text(value); 
                                 })
                             });
+
                         </script>
                     </div>
                 </div>
