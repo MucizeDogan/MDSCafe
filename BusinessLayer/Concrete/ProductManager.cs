@@ -20,6 +20,10 @@ namespace BusinessLayer.Concrete {
             _productDal.Add(entity);
         }
 
+        public int TCategoryCount() {
+            return _productDal.CategoryCount();
+        }
+
         public void TDelete(Product entity) {
             _productDal.Delete(entity);
         }

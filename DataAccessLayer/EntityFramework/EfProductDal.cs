@@ -14,10 +14,17 @@ namespace DataAccessLayer.EntityFramework {
         public EfProductDal(Context context) : base(context) {
         }
 
+        public int CategoryCount() {
+            using var context = new Context();
+            return context.Products.Count();
+        }
+
         public List<Product> GetProductsWithCategories() {
             var context = new Context();
             var values = context.Products.Include(x => x.Category).ToList();
             return values;
         }
+
+        
     }
 }
