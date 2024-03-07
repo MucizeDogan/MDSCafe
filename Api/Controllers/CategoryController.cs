@@ -54,5 +54,10 @@ namespace Api.Controllers {
             var value = _categoryService.TGetById(id);
             return Ok(value);
         }
+
+        [HttpGet("CategoryCount")]
+        public IActionResult CategoryCount() {
+            return Ok(_categoryService.TCategoryCount());
+        }
     }
 }

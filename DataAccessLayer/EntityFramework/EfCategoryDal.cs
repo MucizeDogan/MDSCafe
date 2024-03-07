@@ -12,5 +12,10 @@ namespace DataAccessLayer.EntityFramework {
     public class EfCategoryDal : GenericRepository<Category>, ICategoryDal {
         public EfCategoryDal(Context context) : base(context) {
         }
+
+        public int CategoryCount() {
+            using var context = new Context();
+            return context.Categories.Count();
+        }
     }
 }
