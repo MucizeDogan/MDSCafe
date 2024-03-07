@@ -18,18 +18,18 @@
                 <div class="col-md-12">
                     <div class="card">
                         <script type="text/javascript">
-                            $(document).ready(() => {
-                                var conn = new signalR.HubConnectionBuilder().withUrl("https://localhost:7052/SignalRHub").build();
-                                $("#connstatus").text(conn.state);
+                            $(document).ready(() => { // Döküman çalıştığı zaman
+                            var conn = new signalR.HubConnectionBuilder().withUrl("https://localhost:7052/SignalRHub").build(); // SignalR a bağlantı isteğinde bulunuyorum.
+                                $("#connstatus").text(conn.state); //Bağlantı durumu text olarak yazdırıyorum. (conn(değişkenim).state)
 
-                                conn.start().then(() => {
+                                conn.start().then(() => { //
                                     $("#connstatus").text(conn.state);
 
-                                    conn.invoke("SendCategoryCount"); //Conn.inoke ile SendCategoryCount metoduna istekte bulunduk 
+                                    conn.invoke("SendCategoryCount"); //Conn.invoke ile SendCategoryCount metoduna istekte bulunduk 
 
                                 }).catch((err) => { console.log(err) });
 
-                                conn.on("ReceiveCategoryCount", (value) => {
+                            conn.on("ReceiveCategoryCount", (value) => { // conn.on ile de istekte bulunduğum metodun içinde değeri tutan key e (ReceiveCategoryCount) a istekte bulunacağım.
                                     $("#categorycount").text(value); 
                                 })
                             });

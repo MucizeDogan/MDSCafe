@@ -29,7 +29,7 @@
                                     $("#connstatus").text(conn.state);
                                     //Set Interval metodu bizim sayfayı yenilemeden verilerimizin güncellemesini sağlayacak
                                     setInterval(() => { // SetInterval metodu bir aralık ayarlayacak, Bağlantıyı belli periyotlara düşürecek
-                                        conn.invoke("SendCategoryCount"); //Conn.inoke ile SendCategoryCount metoduna istekte bulunduk 
+                                        conn.invoke("SendCategoryCount"); //Conn.invoke ile SendCategoryCount metoduna istekte bulunduk 
 
                                     }, 1000);   //Her 1 saniyede bir istekte bulunacak
 
@@ -41,6 +41,7 @@
                             });
 
                         </script>
+
                     </div>
                 </div>
             </div>
