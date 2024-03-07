@@ -40,12 +40,24 @@ namespace BusinessLayer.Concrete {
             return _productDal.GetProductsWithCategories();
         }
 
+        public string TLowestPricedProductName() {
+            return _productDal.LowestPricedProductName();
+        }
+
         public int TProductCountByCategoryNameDrink() {
             return _productDal.ProductCountByCategoryNameDrink();
         }
 
         public int TProductCountByCategoryNameHamburger() {
             return _productDal.ProductCountByCategoryNameHamburger();
+        }
+
+        public string TProductNameByPriceHighest() {
+            return _productDal.ProductNameByPriceHighest();
+        }
+
+        public decimal TProductPriceAvg() {
+            return _productDal.ProductPriceAvg();
         }
 
         public void TUpdate(Product entity) {
