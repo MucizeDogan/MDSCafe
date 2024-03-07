@@ -98,5 +98,20 @@ namespace Api.Controllers {
         public IActionResult ProductCountByCategoryNameDrink() {
             return Ok(_productService.TProductCountByCategoryNameDrink());
         }
+
+        [HttpGet("ProductPriceAvg")] //Ürünlerin Ortalama Fiyatı
+        public IActionResult ProductPriceAvg() {
+            return Ok(_productService.TProductPriceAvg());
+        }
+
+        [HttpGet("ProductNameByPriceHighest")] //En Yüksek fiyatlı ürün 
+        public IActionResult ProductNameByPriceHighest() {
+            return Ok(_productService.TProductNameByPriceHighest());
+        }
+
+        [HttpGet("LowestPricedProductName")] //En Düşük Fiyatlı ürün
+        public IActionResult LowestPricedProductName() {
+            return Ok(_productService.TLowestPricedProductName());
+        }
     }
 }
