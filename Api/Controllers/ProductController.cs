@@ -84,9 +84,19 @@ namespace Api.Controllers {
             return Ok(value);
         }
 
-        [HttpGet("ProductCount")]
+        [HttpGet("ProductCount")] // ürün sayısı
         public IActionResult ProductCount() {
             return Ok(_productService.TCategoryCount());
+        }
+
+        [HttpGet("ProductCountByCategoryNameHamburger")] //KAtegorisi Hamburger olan ürünlerin sayısı
+        public IActionResult ProductCountByCategoryNameHamburger() {
+            return Ok(_productService.TProductCountByCategoryNameHamburger());
+        }
+
+        [HttpGet("ProductCountByCategoryNameDrink")] //KAtegorisi İçecek olan ürünlerin sayısı
+        public IActionResult ProductCountByCategoryNameDrink() {
+            return Ok(_productService.TProductCountByCategoryNameDrink());
         }
     }
 }
