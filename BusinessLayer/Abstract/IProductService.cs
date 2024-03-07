@@ -9,5 +9,7 @@ namespace BusinessLayer.Abstract {
     public interface IProductService : IGenericService<Product> {
         List<Product> TGetProductsWithCategories();
         public int TCategoryCount();
+        int TProductCountByCategoryNameHamburger();
+        int TProductCountByCategoryNameDrink();
     }
 }
