@@ -35,6 +35,10 @@ namespace BusinessLayer.Concrete {
             throw new NotImplementedException();
         }
 
+        public decimal TLastOrderTotalPrice() {
+            return _orderDal.LastOrderTotalPrice();
+        }
+
         public int TTotalOrderCount() {
             return _orderDal.TotalOrderCount();
         }
