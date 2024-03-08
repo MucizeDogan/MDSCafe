@@ -20,5 +20,10 @@ namespace Api.Controllers {
         public IActionResult ActiveOrderCount() { // Aktif Sipariş Sayısı
             return Ok(_orderService.TActiveOrderCount());
         }
+
+        [HttpGet("LastOrderTotalPrice")]
+        public IActionResult LastOrderTotalPrice() { // Aktif Sipariş Sayısı
+            return Ok(_orderService.TLastOrderTotalPrice());
+        }
     }
 }
