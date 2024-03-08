@@ -12,5 +12,15 @@ namespace DataAccessLayer.EntityFramework {
     public class EfOrderDal : GenericRepository<Order>, IOrderDal {
         public EfOrderDal(Context context) : base(context) {
         }
+
+        public int ActiveOrderCount() { // Aktif Sipariş Sayısı
+            using var context = new Context();
+            return context.Orders.Where(x=>x.Description== "Müşteri Masada").Count();
+        }
+
+        public int TotalOrderCount() { // Toplam Sipariş Sayısı
+            using var context = new Context();
+            return context.Orders.Count();
+        }
     }
 }
