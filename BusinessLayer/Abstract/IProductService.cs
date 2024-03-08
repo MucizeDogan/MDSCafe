@@ -14,5 +14,6 @@ namespace BusinessLayer.Abstract {
         decimal TProductPriceAvg();
         string TLowestPricedProductName();
         string TProductNameByPriceHighest();
+        decimal THamburgerAvg();
     }
 }
