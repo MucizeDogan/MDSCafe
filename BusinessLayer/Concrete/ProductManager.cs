@@ -40,6 +40,10 @@ namespace BusinessLayer.Concrete {
             return _productDal.GetProductsWithCategories();
         }
 
+        public decimal THamburgerAvg() {
+            return _productDal.HamburgerAvg();
+        }
+
         public string TLowestPricedProductName() {
             return _productDal.LowestPricedProductName();
         }

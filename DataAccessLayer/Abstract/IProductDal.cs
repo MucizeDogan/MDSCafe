@@ -15,6 +15,7 @@ namespace DataAccessLayer.Abstract {
         string LowestPricedProductName();
         string ProductNameByPriceHighest();
         decimal ProductPriceAvg();
+        decimal HamburgerAvg();
 
     }
 }

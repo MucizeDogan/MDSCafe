@@ -51,5 +51,9 @@ namespace DataAccessLayer.EntityFramework {
             using var context = new Context();
             return context.Products.Average(x => x.Price);
         }
+        public decimal HamburgerAvg() {
+            using var context = new Context();
+            return context.Products.Where(x => x.CategoryID == 2).Average(y => y.Price);
+        }
     }
 }

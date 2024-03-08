@@ -113,5 +113,10 @@ namespace Api.Controllers {
         public IActionResult LowestPricedProductName() {
             return Ok(_productService.TLowestPricedProductName());
         }
+
+        [HttpGet("HamburgerAvg")] //En Düşük Fiyatlı ürün
+        public IActionResult HamburgerAvg() {
+            return Ok(_productService.THamburgerAvg());
+        }
     }
 }
