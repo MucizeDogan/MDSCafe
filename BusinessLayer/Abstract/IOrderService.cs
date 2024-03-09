@@ -10,5 +10,6 @@ namespace BusinessLayer.Abstract {
         int TTotalOrderCount();
         int TActiveOrderCount();
         decimal TLastOrderTotalPrice();
+        decimal TTodayTotalPrice();
     }
 }
