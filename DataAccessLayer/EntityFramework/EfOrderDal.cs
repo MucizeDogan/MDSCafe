@@ -23,6 +23,12 @@ namespace DataAccessLayer.EntityFramework {
             return context.Orders.OrderByDescending(x=>x.OrderID).Take(1).Select(y=>y.TotalPrice).FirstOrDefault();
         }
 
+        public decimal TodayTotalPrice() {
+            using var context = new Context();
+            DateTime NowDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            return context.Orders.Where(x => x.OrderDate == NowDate && x.Description == "Hesap Kapatıldı").Sum(y => y.TotalPrice);
+        }
+
         public int TotalOrderCount() { // Toplam Sipariş Sayısı
             using var context = new Context();
             return context.Orders.Count();

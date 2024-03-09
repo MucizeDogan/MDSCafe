@@ -6,10 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract {
-    public interface IOrderDal : IGenericDal<Order>{
-        int TotalOrderCount();
-        int ActiveOrderCount();
-        decimal LastOrderTotalPrice();
-        decimal TodayTotalPrice();
+    public interface IMoneyCaseDal : IGenericDal<MoneyCase>{
+        decimal TotalMoneyCase();
     }
 }

@@ -22,8 +22,13 @@ namespace Api.Controllers {
         }
 
         [HttpGet("LastOrderTotalPrice")]
-        public IActionResult LastOrderTotalPrice() { // Aktif Sipariş Sayısı
+        public IActionResult LastOrderTotalPrice() { // Son Sipariş Tutarı
             return Ok(_orderService.TLastOrderTotalPrice());
+        }
+
+        [HttpGet("TodayTotalPrice")]
+        public IActionResult TodayTotalPrice() { // Bugünkü Kazanç
+            return Ok(_orderService.TTodayTotalPrice());
         }
     }
 }
