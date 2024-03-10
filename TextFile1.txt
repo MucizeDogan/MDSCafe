@@ -2,23 +2,23 @@
 --Kasadaki Tutar
 	--Bugünkü Kazanç
 	--Son Sipariþ tutarý 
-	--Ortalama Fiyat(ürünlerin)
+	--Ortalama Fiyat(ürünlerin)					  +
 	
 
---CategoryCount
-	--Aktif Kategori Sayýsý
-	--Pasif Kategori Sayýsý
-	--Kategori Adýna Göre Ürün Sayýsý1(Hamburger) 	
+--CategoryCount									  +
+	--Aktif Kategori Sayýsý						  +
+	--Pasif Kategori Sayýsý						  +
+	--Kategori Adýna Göre Ürün Sayýsý1(Hamburger) +
 
---ProductCount
-	--En Yüksek Ürünlü Fiyat 
+--ProductCount									  +
+	--En Yüksek Ürünlü Fiyat					  +
 	--En Düþük Ürünlü Fiyat 
 	--Ortalama Hamburger Fiyatý
 
 --Toplam Sipariþ Sayýsý
 	--Aktif Sipariþ Sayýsý 
 	--Masa Sayýsý
-	--Kategori Adýna Göre Ürün Sayýs2(Drink)	
+	--Kategori Adýna Göre Ürün Sayýs2(Drink)	  +
 
 
 
