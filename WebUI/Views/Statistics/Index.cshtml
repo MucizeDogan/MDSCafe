@@ -25,6 +25,7 @@
                     //Set Interval metodu bizim sayfayı yenilemeden verilerimizin güncellemesini sağlayacak
                     setInterval(() => { // SetInterval metodu bir aralık ayarlayacak, Bağlantıyı belli periyotlara düşürecek
                         conn.invoke("SendCategoryCount"); //Conn.invoke ile SendCategoryCount metoduna istekte bulunduk
+                        conn.invoke("SendProductCount"); 
 
                     }, 1000);   //Her 1 saniyede bir istekte bulunacak
 
@@ -33,12 +34,16 @@
                 conn.on("ReceiveCategoryCount", (value) => {
                     $("#categorycount").text(value);
                 })
+
+                conn.on("ReceiveProductCount", (value2) => {
+                    $("#productcount").text(value2);
+                })
             });
 
         </script>
 
 
-        <h4 class="page-title">Dashboard</h4>
+        <h4 class="page-title">Anlık İstatistik Sayfası</h4>
         <div class="row">
             <div class="col-md-3">
                 <div class="card card-stats card-warning">
@@ -46,7 +51,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-users"></i>
+                                    <i class="la la-book"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
@@ -59,25 +64,27 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-3">
                 <div class="card card-stats card-success">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-bar-chart"></i>
+                                    <i class="la la-apple"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Sales</p>
-                                    <h4 class="card-title">$ 1,345</h4>
+                                    <p class="card-category">Ürün Sayısı</p>
+                                    <h4 class="card-title" id="productcount"></h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-3">
                 <div class="card card-stats card-danger">
                     <div class="card-body">

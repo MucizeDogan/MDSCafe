@@ -14,7 +14,7 @@ namespace DataAccessLayer.EntityFramework {
         public EfProductDal(Context context) : base(context) {
         }
 
-        public int CategoryCount() {
+        public int CategoryCount() { //Normalde ProductCount olacak !
             using var context = new Context();
             return context.Products.Count();
         }
