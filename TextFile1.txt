@@ -1,7 +1,7 @@
 
---Kasadaki Tutar
-	--Bugünkü Kazanç
-	--Son Sipariþ tutarý 
+--Kasadaki Tutar								  +
+	--Bugünkü Kazanç							  +
+	--Son Sipariþ tutarý						  +
 	--Ortalama Fiyat(ürünlerin)					  +
 	
 
@@ -12,10 +12,10 @@
 
 --ProductCount									  +
 	--En Yüksek Ürünlü Fiyat					  +
-	--En Düþük Ürünlü Fiyat 
-	--Ortalama Hamburger Fiyatý
+	--En Düþük Ürünlü Fiyat						  +
+	--Ortalama Hamburger Fiyatý					  +
 
---Toplam Sipariþ Sayýsý
+--Toplam Sipariþ Sayýsý							  +
 	--Aktif Sipariþ Sayýsý 
 	--Masa Sayýsý
 	--Kategori Adýna Göre Ürün Sayýs2(Drink)	  +
