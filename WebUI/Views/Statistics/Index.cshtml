@@ -3,10 +3,41 @@
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
 <h1>Index</h1>
 
 <div class="content">
     <div class="container-fluid">
+
+        <script type="text/javascript">
+
+            $(document).ready(() => {
+
+                var conn = new signalR.HubConnectionBuilder().withUrl("https://localhost:7052/SignalRHub").build();
+                $("#connstatus").text(conn.state);
+
+                conn.start().then(() => {
+                    $("#connstatus").text(conn.state);
+                    //Set Interval metodu bizim sayfayı yenilemeden verilerimizin güncellemesini sağlayacak
+                    setInterval(() => { // SetInterval metodu bir aralık ayarlayacak, Bağlantıyı belli periyotlara düşürecek
+                        conn.invoke("SendCategoryCount"); //Conn.invoke ile SendCategoryCount metoduna istekte bulunduk
+
+                    }, 1000);   //Her 1 saniyede bir istekte bulunacak
+
+                }).catch((err) => { console.log(err) });
+
+                conn.on("ReceiveCategoryCount", (value) => {
+                    $("#categorycount").text(value);
+                })
+            });
+
+        </script>
+
+
         <h4 class="page-title">Dashboard</h4>
         <div class="row">
             <div class="col-md-3">
@@ -20,8 +51,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Visitors</p>
-                                    <h4 class="card-title">1,294</h4>
+                                    <p class="card-category">Kategori Sayısı</p>
+                                    <h4 class="card-title" id="categorycount"></h4>
                                 </div>
                             </div>
                         </div>
