@@ -62,6 +62,39 @@
                 conn.on("ReceiveProductNameByPriceHighest", (value8) => {
                     $("#receiveproductnamebypricehighest").text(value8);
                 })
+
+                conn.on("ReceiveTotalMoneyCase", (value9) => {
+                    $("#receivetotalmoneycase").text(value9);
+                })
+
+                conn.on("ReceiveTodayTotalPrice", (value10) => {
+                    $("#receivetodaytotalprice").text(value10);
+                })
+
+                conn.on("ReceiveLastOrderTotalPrice", (value11) => {
+                    $("#receivelastordertotalprice").text(value11);
+                })
+
+                conn.on("ReceiveLowestPricedProductName", (value12) => {
+                    $("#receivelowestpricedproductname").text(value12);
+                })
+
+                conn.on("ReceiveHamburgerAvg", (value13) => {
+                    $("#receivehamburgeravg").text(value13);
+                })
+
+                conn.on("ReceiveTotalOrderCount", (value14) => {
+                    $("#receivetotalordercount").text(value14);
+                })
+
+                conn.on("ReceiveActiveOrderCount", (value15) => {
+                    $("#receiveactiveordercount").text(value15);
+                })
+
+                conn.on("ReceiveCafeTableCount", (value16) => {
+                    $("#receivecafetablecount").text(value16);
+                })
+
             });
 
         </script>
@@ -81,7 +114,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <p class="card-category">KASA</p>
-                                    <h4 class="card-title" ></h4>
+                                    <h4 class="card-title" id="receivetotalmoneycase"></h4>
                                 </div>
                             </div>
                         </div>
@@ -139,8 +172,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
+                                    <p class="card-category">Toplam Sipariş Sayısı</p>
+                                    <h4 class="card-title" id="receivetotalordercount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -162,8 +195,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category"></p>
-                                    <h4 class="card-title" ></h4>
+                                    <p class="card-category"> Bugünün Kazancı</p>
+                                    <h4 class="card-title" id="receivetodaytotalprice"></h4>
                                 </div>
                             </div>
                         </div>
@@ -219,8 +252,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
+                                    <p class="card-category">Aktif Sipariş Sayısı</p>
+                                    <h4 class="card-title" id="receiveactiveordercount">576</h4>
                                 </div>
                             </div>
                         </div>
@@ -242,8 +275,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category"></p>
-                                    <h4 class="card-title" ></h4>
+                                    <p class="card-category">Son Sipariş Tutarı</p>
+                                    <h4 class="card-title" id="receivelastordertotalprice"></h4>
                                 </div>
                             </div>
                         </div>
@@ -280,8 +313,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Subscribers</p>
-                                    <h4 class="card-title">1303</h4>
+                                    <p class="card-category">En Ucuz Ürün</p>
+                                    <h4 class="card-title" id="receivelowestpricedproductname"></h4>
                                 </div>
                             </div>
                         </div>
@@ -299,8 +332,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
+                                    <p class="card-category"> Masa Sayısı</p>
+                                    <h4 class="card-title" id="receivecafetablecount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -355,13 +388,13 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-newspaper-o"></i>
+                                    <i class="la la-newspaper-o" ></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Subscribers</p>
-                                    <h4 class="card-title" >1303</h4>
+                                    <p class="card-category">Ortalama Hamburger</p>
+                                    <h4 class="card-title" id="receivehamburgeravg"></h4>
                                 </div>
                             </div>
                         </div>

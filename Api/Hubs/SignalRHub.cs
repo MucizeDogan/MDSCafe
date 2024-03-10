@@ -6,10 +6,16 @@ namespace Api.Hubs {
     public class SignalRHub : Hub{
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
+        private readonly IMoneyCaseService _moneyCaseService;
+        private readonly IOrderService _orderService;
+        private readonly ICafeTableService _cafeTableService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService) {
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IMoneyCaseService moneyCaseService, IOrderService orderService, ICafeTableService cafeTableService) {
             _categoryService = categoryService;
             _productService = productService;
+            _moneyCaseService = moneyCaseService;
+            _orderService = orderService;
+            _cafeTableService = cafeTableService;
         }
 
         public async Task SendStatistics() {  
@@ -36,6 +42,30 @@ namespace Api.Hubs {
 
             var value8 = _productService.TProductNameByPriceHighest();
             await Clients.All.SendAsync("ReceiveProductNameByPriceHighest", value8);
+
+            var value9 = _moneyCaseService.TTotalMoneyCase().ToString("0.00") + " ₺";
+            await Clients.All.SendAsync("ReceiveTotalMoneyCase", value9);
+
+            var value10 = _orderService.TTodayTotalPrice().ToString("0.00") + " ₺";
+            await Clients.All.SendAsync("ReceiveTodayTotalPrice", value10);
+
+            var value11 = _orderService.TLastOrderTotalPrice().ToString("0.00") + " ₺";
+            await Clients.All.SendAsync("ReceiveLastOrderTotalPrice", value11);
+
+            var value12 = _productService.TLowestPricedProductName();
+            await Clients.All.SendAsync("ReceiveLowestPricedProductName", value12);
+
+            var value13 = _productService.THamburgerAvg().ToString("0.00") + " ₺";
+            await Clients.All.SendAsync("ReceiveHamburgerAvg", value13);
+
+            var value14 = _orderService.TTotalOrderCount();
+            await Clients.All.SendAsync("ReceiveTotalOrderCount", value14);
+
+            var value15 = _orderService.TActiveOrderCount();
+            await Clients.All.SendAsync("ReceiveActiveOrderCount", value15);
+
+            var value16 = _cafeTableService.TCafeTableCount();
+            await Clients.All.SendAsync("ReceiveCafeTableCount", value16);
         }
 
     }
