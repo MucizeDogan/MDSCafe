@@ -3,7 +3,14 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
-
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/css/ready.css">
+    <link rel="stylesheet" href="assets/css/demo.css">
+</head>
 <div class="content">
     <div class="container-fluid">
         <h4 class="page-title">Öne Çıkan Alan İşlemleri</h4>
@@ -14,7 +21,7 @@
                         <div class="card-title">Öne Çıkan Alan Listesi</div>
                     </div>
                     <div class="card-body">
-                        <div class="card-sub">
+                        @* <div class="card-sub">
                             Öne Çıkan Alan ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz.
                         </div>
                         <table class="table mt-3">
@@ -48,7 +55,40 @@
                                 }
                             </tbody>
                         </table>
-                        <a href="/Feature/CreateFeature/" class="btn btn-outline-primary">Yeni Öne Çıkan Alan</a>
+                        <a href="/Feature/CreateFeature/" class="btn btn-outline-primary">Yeni Öne Çıkan Alan</a> *@
+                            <table class="table table-head-bg-success table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Başlık1</th>
+                                    <th scope="col">Başlık2</th>
+                                    <th scope="col">Başlık3</th>
+                                    <th scope="col">Açıklama1</th>
+                                    <th scope="col">Açıklama2</th>
+                                    <th scope="col">Açıklama3</th>
+                                    <th scope="col">Sil</th>
+                                    <th scope="col">Güncelle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model) {
+                                    <tr>
+                                        <td>@item.FeatureID</td>
+                                        <td>@item.Title1</td>
+                                        <td>@item.Title2</td>
+                                        <td>@item.Title3</td>
+                                        <td>@item.Description1</td>
+                                        <td>@item.Description2</td>
+                                        <td>@item.Description3</td>
+                                        <td>
+                                            <a href="/Feature/DeleteFeature/@item.FeatureID" class="btn btn-outline-danger btn-rounded"
+                                               onclick="return confirm('silmek istediğinize emin misiniz?')">Sil</a>
+                                        </td>
+                                        <td><a href="/Feature/UpdateFeature/@item.FeatureID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
                     </div>
                 </div>
             </div>
