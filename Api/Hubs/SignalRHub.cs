@@ -68,5 +68,16 @@ namespace Api.Hubs {
             await Clients.All.SendAsync("ReceiveCafeTableCount", value16);
         }
 
+        public async Task SendProgress() {
+            var value = _moneyCaseService.TTotalMoneyCase().ToString("0.00") + " ₺";
+            await Clients.All.SendAsync("ReceiveTotalMoneyCase", value);
+
+            var value2 = _orderService.TActiveOrderCount();
+            await Clients.All.SendAsync("ReceiveActiveOrderCount", value2);
+
+            var value3 = _cafeTableService.TCafeTableCount();
+            await Clients.All.SendAsync("ReceiveCafeTableCount", value3);
+        }
+
     }
 }
