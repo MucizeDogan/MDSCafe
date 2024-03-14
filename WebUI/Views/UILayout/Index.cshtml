@@ -8,12 +8,13 @@
 
 @await Component.InvokeAsync("_UILayoutHeadComponentPartial")
 
-<body class="sub_page">
+<body>
 
     @await Component.InvokeAsync("_UILayoutNavBarComponentPartial")
 
     <!-- book section -->
     @RenderBody()
+
     <!-- end book section -->
     <!-- footer section -->
     @await Component.InvokeAsync("_UILayoutFooterComponentPartial")
