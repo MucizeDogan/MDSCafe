@@ -1,8 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using WebUI.Dtos.ContactMeDto;
 
 namespace WebUI.ViewComponents.UILayoutComponents {
     public class _UILayoutFooterComponentPartial : ViewComponent {
-        public IViewComponentResult Invoke() {
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public _UILayoutFooterComponentPartial(IHttpClientFactory httpClientFactory) {
+            _httpClientFactory = httpClientFactory;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync() {
+            var client = _httpClientFactory.CreateClient(); // Bir istemci oluşturdum.
+            var res = await client.GetAsync("https://localhost:7052/api/ContactMe"); // İstekte bulunacağımız apinin url sini yazıyoruz
+            if (res.IsSuccessStatusCode) {
+                var jsonData = await res.Content.ReadAsStringAsync(); // json dan gelen içerği string formatta oku
+                var values = JsonConvert.DeserializeObject<List<ResultContactMeDto>>(jsonData); // Json datayı çözüp normal metine dönüştürür(DeserializeObject)
+                return View(values);
+            }
             return View();
         }
     }
