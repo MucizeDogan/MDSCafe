@@ -5,6 +5,7 @@ using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,6 +67,12 @@ builder.Services.AddScoped<ISliderDal, EfSliderDal>();
 
 builder.Services.AddScoped<IBasketService, BasketManager>();
 builder.Services.AddScoped<IBasketDal, EfBasketDal>();
+
+//Cycle Was Detected Hatasýnýn çözümü
+//Basket için Include metodu kullanmýþtýk ürün adýna ulaþmak için alt alta bir yapý olarak gelmesi gerekiyordu ama hata alýyorduk bu kod ile istediðimiz yapýya ulaþýyoruz.
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = 
+    ReferenceHandler.IgnoreCycles);
 
 // Add services to the container.
 
