@@ -49,7 +49,7 @@
                         <tbody class="align-middle">
                         <tr>
                             <td class="align-middle">@count</td>
-                            <td class="align-middle">@item.ProductID</td>
+                            <td class="align-middle">@item.ProductName</td>
                             <td class="align-middle">@item.Count</td>
                             <td class="align-middle">@item.Price</td>
                             <td class="align-middle">@item.TotalPrice</td>
@@ -58,6 +58,16 @@
                     </tbody>
                     }
                 </table>
+            </div>
+            <div class="col-lg-4">
+                <form>
+                    <div class="input-group">
+                        <input type="text" id="couponcode" class="form-control border-1 p-4" placeholder="Kupon Kodunuz" />
+                        <div>
+                            <a style="height:48px;padding-top:11px;margin-left:5px" class="btn btn-primary" id="btncouponcode">Kuponu Uygula</a>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
