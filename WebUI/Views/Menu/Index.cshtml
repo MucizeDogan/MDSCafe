@@ -128,14 +128,15 @@
         function showproductid(value) {
             var id = value;
             $.ajax({
-                type: 'post',
+                type: 'POST',
                 data: { item: id },
+                url: "/Menu/AddBasket/" + id,
                 contentType: 'json',
                 success: function () {
-                    swal("Seçtiğiniz Ürünün ID Değeri : " + id, "", "success");
+                    swal("Seçtiğiniz Ürünün ID Değeri : " + id, "Seçtiğiniz Ürün Sepete Eklendi", "success");
                 }
             });
-        }
+        } 
     </script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
