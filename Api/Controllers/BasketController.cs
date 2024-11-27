@@ -1,6 +1,8 @@
 ﻿using Api.Model;
 using BusinessLayer.Abstract;
 using DataAccessLayer.Concrete;
+using DtoLayer.BasketDto;
+using EntityLayer.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +37,19 @@ namespace Api.Controllers {
                 ProductName = z.Product.ProductName
             }).ToList();
             return Ok(values);
+        }
+
+        [HttpPost]
+        public IActionResult CreateBasket(CreateBasketDto createBasketDto) {
+            using var context = new Context();
+            _basketService.TAdd(new Basket() {
+                ProductID = createBasketDto.ProductID,
+                Count = 1,
+                CafeTableID=1,
+                Price = context.Products.Where(x => x.ProductID == createBasketDto.ProductID).Select(y => y.Price).FirstOrDefault(),
+                TotalPrice = 0
+            });
+            return Ok();
         }
     }
 }
