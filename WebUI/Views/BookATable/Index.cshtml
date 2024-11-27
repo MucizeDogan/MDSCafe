@@ -83,18 +83,6 @@
 
     @await Component.InvokeAsync("_UILAyoutScriptComponentPartial")
 
-    @* <script>
-        @if (TempData["SuccessMessage"] != null) {
-            <text>
-                swal("Başarılı", "@TempData["SuccessMessage"]", "success");
-            </text>
-        } else if (TempData["ErrorMessage"] != null) {
-            <text>
-                swal("Hata", "@TempData["ErrorMessage"]", "error");
-            </text>
-        }
-    </script> *@
-
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script>
