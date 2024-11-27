@@ -3,6 +3,8 @@
     Layout = null;
     int count = 0;
     decimal basketTotalPrice = 0;
+    decimal KDV = 10;
+    decimal totalPriceWithTax = 0;
 }
 
 <!DOCTYPE html>
@@ -47,6 +49,7 @@
                     </thead>
                     @foreach (var item in Model) {
                         basketTotalPrice = Model.Sum(x => x.Price);
+                        totalPriceWithTax = basketTotalPrice * (1 + KDV / 100);
                         count++;
                         <tbody class="align-middle">
                             <tr>
@@ -55,7 +58,7 @@
                                 <td class="align-middle">@item.Count</td>
                                 <td class="align-middle">@item.Price</td>
                                 <td class="align-middle">@item.TotalPrice</td>
-                                <td class="align-middle btn-delete"><button data-basketid="@item.BasketID" id="btndeletebasketid" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle btn-delete"><a class="btn btn-sm btn-danger" href="/Baskets/DeleteBasket/@item.BasketID"><i class="fa fa-times"></i></a></td>
                             </tr>
                         </tbody>
                     }
@@ -85,19 +88,20 @@
                         <hr />
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-muted mb-0">KDV Oranı</h6>
-                            <h6 id="kdv" class="font-weight-bold text-secondary mb-0">20%</h6>
+                            <h6 id="kdv" class="font-weight-bold text-secondary mb-0">@KDV%</h6>
                         </div>
                         <hr />
                         <h5 class="text-center mt-4">
                             <span class="badge bg-success text-white px-5 py-3 d-inline-block"
                                   style="font-size: 1.05rem; border-radius: 8px;">
-                                Toplam Tutar: <span id="finaltotalprice">244</span> TL
+                                Toplam Tutar: <span id="finaltotalprice">@totalPriceWithTax</span> TL
                             </span>
                         </h5>
                         <div class="text-center mt-4">
                             <button id="btnchecked"
                                     class="btn btn-primary btn-lg px-5 py-3"
-                                    style="font-size: 1.15rem; border-radius: 5px;">
+                                    style="font-size: 1.15rem; border-radius: 5px;"
+                            @(Model.Count <= 0 ? "disabled" : "")>
                                 <i class="fa fa-check-circle mr-2"></i> Siparişi Tamamla
                             </button>
                         </div>
