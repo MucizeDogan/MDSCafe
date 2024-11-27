@@ -5,8 +5,39 @@
     int count = 0;
 }
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
 <div class="content">
     <div class="container-fluid">
+
+        <script type="text/javascript">
+
+            $(document).ready(() => {
+
+                var conn = new signalR.HubConnectionBuilder().withUrl("https://localhost:7052/SignalRHub").build();
+                $("#connstatus").text(conn.state);
+
+                conn.start().then(() => {
+                    $("#connstatus").text(conn.state);
+                    //Set Interval metodu bizim sayfayı yenilemeden verilerimizin güncellemesini sağlayacak
+                    setInterval(() => { // SetInterval metodu bir aralık ayarlayacak, Bağlantıyı belli periyotlara düşürecek
+                        conn.invoke("GetBookingList"); //Conn.invoke ile GetBookingList metoduna istekte bulunduk
+                    }, 100000);   //Her 1 dk da bir istekte bulunacak
+
+                }).catch((err) => { console.log(err) });
+
+                conn.on("ReceiveBookingList", (value) => {
+                    console.log(value);
+                })
+
+
+            });
+
+        </script>
+
         <h4 class="page-title">Rezervasyon İşlemleri</h4>
         <div class="row">
             <div class="col-md-12">

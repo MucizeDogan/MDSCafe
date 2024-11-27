@@ -1,0 +1,116 @@
+﻿@model CreateBookingDto;
+@{
+    Layout = null;
+    int wPersonCount = 0;
+    string wDate = "";
+}
+
+<!DOCTYPE html>
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeadComponentPartial")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_MenuNavbarComponentPartial")
+
+    <section class="book_section layout_padding">
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                    Rezervasyon Oluşturun
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form_container">
+                        <form method="post">
+                            <div>
+                                <input type="text" class="form-control" placeholder="Adınız Soyadınız" asp-for="Name" />
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" placeholder="Telefon Numaranız" asp-for="Phone" />
+                            </div>
+                            <div>
+                                <input type="email" class="form-control" placeholder="Mail Adresiniz" asp-for="Mail" />
+                            </div>
+                            <div>
+                                <select class="form-control nice-select wide" asp-for="PersonCount">
+                                    <option value="" disabled selected>
+                                        Kişi Sayısı?
+                                    </option>
+                                    <option value="1">
+                                        1
+                                    </option>
+                                    <option value="2">
+                                        2
+                                    </option>
+                                    <option value="3">
+                                        3
+                                    </option>
+                                    <option value="4">
+                                        4
+                                    </option>
+                                    <option value="5">
+                                        5
+                                    </option>
+                                    <option value="6">
+                                        6+
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="date" class="form-control" asp-for="Date" value="@DateTime.Now.Date.AddDays(1).ToString("yyyy-MM-dd")">
+                            </div>
+                            <div class="btn_box">
+                                <button type="submit">
+                                    Rezervasyon Yapın
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="map_container ">
+                        <div id="googleMap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @await Component.InvokeAsync("_UILayoutFooterComponentPartial")
+
+    @await Component.InvokeAsync("_UILAyoutScriptComponentPartial")
+
+    @* <script>
+        @if (TempData["SuccessMessage"] != null) {
+            <text>
+                swal("Başarılı", "@TempData["SuccessMessage"]", "success");
+            </text>
+        } else if (TempData["ErrorMessage"] != null) {
+            <text>
+                swal("Hata", "@TempData["ErrorMessage"]", "error");
+            </text>
+        }
+    </script> *@
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage)) {
+            <text>
+                swal("Rezervasyon başarıyla oluşturuldu.", "@Html.Raw(ViewBag.SuccessMessage)", "success");
+            </text>
+        } else if (!string.IsNullOrEmpty(ViewBag.ErrorMessage)) {
+            <text>
+                swal("Rezervasyon sırasında bir hata oluştu.", "@Html.Raw(ViewBag.ErrorMessage)", "error");
+            </text>
+        }
+    </script>
+
+    
+
+</body>
+
+</html>
