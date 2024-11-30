@@ -12,6 +12,11 @@ namespace DataAccessLayer.EntityFramework {
     public class EfNotificationDal : GenericRepository<Notification>, INotificationDal {
         public EfNotificationDal(Context context) : base(context) {
         
-        } 
+        }
+
+        public int NotificationCountByStatusFalse() {
+            using var context = new Context();
+            return context.Notifications.Where(x=>x.Status==false).Count();
+        }
     }
 }

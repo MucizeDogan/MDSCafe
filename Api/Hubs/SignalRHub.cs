@@ -10,14 +10,16 @@ namespace Api.Hubs {
         private readonly IOrderService _orderService;
         private readonly ICafeTableService _cafeTableService;
         private readonly IBookingService _bookingService;
+        private readonly INotificationService _notificationService;
 
-        public SignalRHub(ICategoryService categoryService, IProductService productService, IMoneyCaseService moneyCaseService, IOrderService orderService, ICafeTableService cafeTableService, IBookingService bookingService) {
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IMoneyCaseService moneyCaseService, IOrderService orderService, ICafeTableService cafeTableService, IBookingService bookingService, INotificationService notificationService) {
             _categoryService = categoryService;
             _productService = productService;
             _moneyCaseService = moneyCaseService;
             _orderService = orderService;
             _cafeTableService = cafeTableService;
             _bookingService = bookingService;
+            _notificationService = notificationService;
         }
 
         public async Task SendStatistics() {  
@@ -84,6 +86,11 @@ namespace Api.Hubs {
         public async Task GetBookingList() {
             var values = _bookingService.TGetListAll();
             await Clients.All.SendAsync("ReceiveBookingList", values);
+        }
+
+        public async Task SendNotification() {
+            var value = _notificationService.TNotificationCountByStatusFalse();
+            await Clients.All.SendAsync("ReceiveNotificationCountByFalse", value); // Burada gelen değeri client tarafına gönderme
         }
 
     }
