@@ -38,5 +38,9 @@ namespace BusinessLayer.Concrete {
         public int TNotificationCountByStatusFalse() {
             return _notificationDal.NotificationCountByStatusFalse();
         }
+
+        public List<Notification> TGetAllNotificationByStatusFalse() {
+            return _notificationDal.GetAllNotificationByStatusFalse();
+        }
     }
 }

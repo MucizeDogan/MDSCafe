@@ -9,5 +9,6 @@ using System.Threading.Tasks;
 namespace DataAccessLayer.Abstract {
     public interface INotificationDal : IGenericDal<Notification> {
         int NotificationCountByStatusFalse();
+        List<Notification> GetAllNotificationByStatusFalse(); // Durumu okunmamış olanları listele
     }
 }
