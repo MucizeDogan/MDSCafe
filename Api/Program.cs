@@ -68,6 +68,9 @@ builder.Services.AddScoped<ISliderDal, EfSliderDal>();
 builder.Services.AddScoped<IBasketService, BasketManager>();
 builder.Services.AddScoped<IBasketDal, EfBasketDal>();
 
+builder.Services.AddScoped<INotificationService, NotificationManager>();
+builder.Services.AddScoped<INotificationDal, EfNotificationDal>();
+
 //Cycle Was Detected Hatasýnýn çözümü
 //Basket için Include metodu kullanmýþtýk ürün adýna ulaþmak için alt alta bir yapý olarak gelmesi gerekiyordu ama hata alýyorduk bu kod ile istediðimiz yapýya ulaþýyoruz.
 builder.Services.AddControllersWithViews()
