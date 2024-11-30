@@ -9,6 +9,7 @@ namespace EntityLayer.Entities {
         public int NotificationID { get; set; }
         public int NotificationType { get; set; } 
         public string NotificationTypeText { get; set; }
+        public string Icon { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public bool Status { get; set; }

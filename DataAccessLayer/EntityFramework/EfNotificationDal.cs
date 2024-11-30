@@ -14,6 +14,11 @@ namespace DataAccessLayer.EntityFramework {
         
         }
 
+        public List<Notification> GetAllNotificationByStatusFalse() {
+            using var context = new Context();
+            return context.Notifications.Where(x => x.Status == false).ToList();
+        }
+
         public int NotificationCountByStatusFalse() {
             using var context = new Context();
             return context.Notifications.Where(x=>x.Status==false).Count();

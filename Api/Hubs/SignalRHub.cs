@@ -91,6 +91,9 @@ namespace Api.Hubs {
         public async Task SendNotification() {
             var value = _notificationService.TNotificationCountByStatusFalse();
             await Clients.All.SendAsync("ReceiveNotificationCountByFalse", value); // Burada gelen değeri client tarafına gönderme
+
+            var value2 = _notificationService.TGetAllNotificationByStatusFalse();
+            await Clients.All.SendAsync("ReceiveNotificationListByFalse", value2);
         }
 
     }
