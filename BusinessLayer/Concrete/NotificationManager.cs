@@ -34,5 +34,9 @@ namespace BusinessLayer.Concrete {
         public void TUpdate(Notification entity) {
             _notificationDal.Update(entity);
         }
+
+        public int TNotificationCountByStatusFalse() {
+            return _notificationDal.NotificationCountByStatusFalse();
+        }
     }
 }

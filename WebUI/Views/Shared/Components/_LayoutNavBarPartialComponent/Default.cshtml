@@ -1,5 +1,35 @@
 ﻿
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
 <div class="main-header">
+	<script type="text/javascript">
+
+		$(document).ready(() => {
+
+			var conn = new signalR.HubConnectionBuilder().withUrl("https://localhost:7052/SignalRHub").build();
+			$("#connstatus").text(conn.state);
+
+			conn.start().then(() => {
+				$("#connstatus").text(conn.state);
+				//Set Interval metodu bizim sayfayı yenilemeden verilerimizin güncellemesini sağlayacak
+				setInterval(() => { // SetInterval metodu bir aralık ayarlayacak, Bağlantıyı belli periyotlara düşürecek
+					conn.invoke("SendNotification"); //Conn.invoke ile SendCategoryCount metoduna istekte bulunduk
+
+
+				}, 1000);   //Her 1 saniyede bir istekte bulunacak
+
+			}).catch((err) => { console.log(err) });
+
+			conn.on("ReceiveNotificationCountByFalse", (value) => {
+				$("#notificationcount").text(value);
+			})
+
+		});
+
+	</script>
 			<div class="logo-header">
 				<a href="index.html" class="logo">
 					MDS Cafe Admin
@@ -37,7 +67,7 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="la la-bell"></i>
-								<span class="notification">3</span>
+						<span class="notification" id="notificationcount"></span>
 							</a>
 							<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
 								<li>
