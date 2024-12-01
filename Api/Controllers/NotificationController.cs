@@ -69,7 +69,7 @@ namespace Api.Controllers {
                 Date = Convert.ToDateTime(updateNotificationDto.Date.ToShortDateString())
 
             };
-            _notificationService.TAdd(notification);
+            _notificationService.TUpdate(notification);
             return Ok("Bildirim Güncelleme başarılı");
         }
     }

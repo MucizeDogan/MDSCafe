@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Text;
 using WebUI.Dtos.NotificationDto;
@@ -24,8 +25,23 @@ namespace WebUI.Controllers {
 
         [HttpGet]
         public IActionResult CreateNotification() {
-            return View();
+            ViewBag.NotificationTypes = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "1 - notif-icon notif-primary" },
+                new SelectListItem { Value = "2", Text = "2 - notif-icon notif-success" },
+                new SelectListItem { Value = "3", Text = "3 - notif-icon notif-danger" }
+            };
+
+            ViewBag.Icons = new Dictionary<string, string>
+            {
+                { "1", "la la-user-plus" },
+                { "2", "la la-comment" },
+                { "3", "la la-heart" }
+            };
+
+            return View(new CreateNotificationDto());
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateNotification(CreateNotificationDto createNotificationDto) {
             var client = _httpClientFactory.CreateClient();
@@ -49,6 +65,20 @@ namespace WebUI.Controllers {
 
         [HttpGet]
         public async Task<IActionResult> UpdateNotification(int id) {
+            ViewBag.NotificationTypes = new List<SelectListItem>
+            {
+        new SelectListItem { Value = "1", Text = "1 - notif-icon notif-primary" },
+        new SelectListItem { Value = "2", Text = "2 - notif-icon notif-success" },
+        new SelectListItem { Value = "3", Text = "3 - notif-icon notif-danger" }
+    };
+
+            ViewBag.Icons = new Dictionary<string, string>
+            {
+        { "1", "la la-user-plus" },
+        { "2", "la la-comment" },
+        { "3", "la la-heart" }
+    };
+
             var client = _httpClientFactory.CreateClient();
             var res = await client.GetAsync($"https://localhost:7052/api/Notification/{id}");
             if (!res.IsSuccessStatusCode) {
