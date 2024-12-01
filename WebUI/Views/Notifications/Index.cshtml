@@ -36,15 +36,15 @@
                                         <td>@item.Date</td>
                                         <td>@item.Status</td>
                                         <td>
-                                            <a href="/Notification/DeleteNotification/@item.NotificationID" class="btn btn-outline-danger btn-rounded"
+                                            <a href="/Notifications/DeleteNotification/@item.NotificationID" class="btn btn-outline-danger btn-rounded"
                                                onclick="return confirm('@item.Description bu bildirimi silmek istediğinize emin misiniz?')">Sil</a>
                                         </td>
-                                        <td><a href="/Notification/UpdateNotification/@item.NotificationID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
+                                        <td><a href="/Notifications/UpdateNotification/@item.NotificationID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <a href="/Notification/CreateNotification/" class="btn btn-outline-primary">Yeni Bildirim</a>
+                        <a href="/Notifications/CreateNotification/" class="btn btn-outline-primary">Yeni Bildirim</a>
                     </div>
                 </div>
             </div>

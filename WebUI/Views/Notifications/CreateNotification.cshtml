@@ -1,0 +1,75 @@
+﻿@model CreateNotificationDto
+@{
+    ViewData["Title"] = "CreateNotification";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Bildirim İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Yeni Bildirim Girişi</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="NotificationType">Bildirim Türü</label>
+                                <select class="form-control" asp-for="NotificationType" id="NotificationType">
+                                    @foreach (var type in ViewBag.NotificationTypes as List<SelectListItem>) {
+                                        <option value="@type.Value">@type.Text</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="NotificationTypeText">Bildirim Türü Metni</label>
+                                <input type="text" class="form-control" asp-for="NotificationTypeText" id="NotificationTypeText" readonly>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="Icon">Bildirim İcon</label>
+                                <input type="text" class="form-control" asp-for="Icon" id="Icon" readonly>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="Description">Açıklama</label>
+                                <input type="text" class="form-control" asp-for="Description" id="Description">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-primary">Ekle</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+        const icons = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Icons));
+
+        document.getElementById('NotificationType').addEventListener('change', function () {
+            const selectedValue = this.value;
+
+            // Bildirim Türü Metni Ayarla
+            const textField = document.getElementById('NotificationTypeText');
+            const selectedText = this.options[this.selectedIndex].text.split(" - ")[1];
+            textField.value = selectedText;
+
+            // Icon Ayarla
+            const iconField = document.getElementById('Icon');
+            iconField.value = icons[selectedValue] || '';
+        });
+    </script>
+
+
+
+
