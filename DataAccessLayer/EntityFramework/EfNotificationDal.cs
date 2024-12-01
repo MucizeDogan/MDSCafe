@@ -41,5 +41,16 @@ namespace DataAccessLayer.EntityFramework {
                 context.SaveChanges();
             }
         }
+
+        public void DeleteAllNotificationByTrue() {
+            using var context = new Context();
+            var values = context.Notifications.Where(x => x.Status == true).ToList();
+            // Tüm okunmuş bildirimleri sil
+            context.Notifications.RemoveRange(values);
+
+            // Değişiklikleri kaydet
+            context.SaveChanges();
+
+        }
     }
 }

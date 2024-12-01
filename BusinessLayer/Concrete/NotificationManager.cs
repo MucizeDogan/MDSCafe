@@ -50,5 +50,9 @@ namespace BusinessLayer.Concrete {
         public void TNotificationChangeToFalse(int id) {
             _notificationDal.NotificationChangeToFalse(id);
         }
+
+        public void TDeleteAllNotificationByTrue() {
+            _notificationDal.DeleteAllNotificationByTrue();
+        }
     }
 }

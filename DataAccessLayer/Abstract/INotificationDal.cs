@@ -12,5 +12,6 @@ namespace DataAccessLayer.Abstract {
         List<Notification> GetAllNotificationByStatusFalse(); // Durumu okunmamış olanları listele
         void NotificationChangeToTrue(int id); // Okundu olarak işaretle
         void NotificationChangeToFalse(int id);
+        void DeleteAllNotificationByTrue();
     }
 }
