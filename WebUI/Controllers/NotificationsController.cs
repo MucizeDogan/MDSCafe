@@ -147,5 +147,15 @@ namespace WebUI.Controllers {
             }
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAllNotificationByTrue() {
+            var client = _httpClientFactory.CreateClient();
+            var res = await client.PostAsync("https://localhost:7052/api/Notification/DeleteAllNotificationByTrue", null); // API'ye POST isteği gönderiyoruz
+            if (res.IsSuccessStatusCode) {
+                return RedirectToAction("Index"); // Başarılıysa anasayfaya yönlendir
+            }
+            return View(); // Başarısızsa aynı sayfada kal
+        }
     }
 }

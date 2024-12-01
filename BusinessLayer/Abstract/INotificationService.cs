@@ -11,5 +11,6 @@ namespace BusinessLayer.Abstract {
         List<Notification> TGetAllNotificationByStatusFalse();
         void TNotificationChangeToTrue(int id); // Okundu olarak işaretle
         void TNotificationChangeToFalse(int id);
+        void TDeleteAllNotificationByTrue();
     }
 }

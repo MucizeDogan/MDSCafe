@@ -84,5 +84,11 @@ namespace Api.Controllers {
             _notificationService.TNotificationChangeToTrue(id);
             return Ok("Bildirim durumu True olarak güncellendi");
         }
+
+        [HttpPost("DeleteAllNotificationByTrue")]
+        public IActionResult DeleteAllNotificationByTrue() {
+            _notificationService.TDeleteAllNotificationByTrue(); // Okunmuş olanları sil
+            return Ok("Okunmuş tüm bildirimler başarıyla silindi");
+        }
     }
 }

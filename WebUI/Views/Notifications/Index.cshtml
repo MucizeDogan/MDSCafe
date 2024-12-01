@@ -49,9 +49,10 @@
                             </tbody>
                         </table>
                         <a href="/Notifications/CreateNotification/" class="btn btn-outline-primary">Yeni Bildirim</a>
-                        <span class="col-md-6">
-                            <a href="/Notifications/CreateNotification/" class="btn btn-outline-danger">Okunmuşları SİL</a>
-                        </span>
+                        
+                        <form method="post" action="/Notifications/DeleteAllNotificationByTrue">
+                            <button type="submit" class="btn btn-outline-primary">Okunmuşları SİL</button>
+                        </form>
                         
                     </div>
                 </div>
