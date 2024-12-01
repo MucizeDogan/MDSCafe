@@ -70,14 +70,14 @@ namespace WebUI.Controllers {
         new SelectListItem { Value = "1", Text = "1 - notif-icon notif-primary" },
         new SelectListItem { Value = "2", Text = "2 - notif-icon notif-success" },
         new SelectListItem { Value = "3", Text = "3 - notif-icon notif-danger" }
-    };
+            };
 
             ViewBag.Icons = new Dictionary<string, string>
             {
-        { "1", "la la-user-plus" },
-        { "2", "la la-comment" },
-        { "3", "la la-heart" }
-    };
+                    { "1", "la la-user-plus" },
+                    { "2", "la la-comment" },
+                    { "3", "la la-heart" }
+                };
 
             var client = _httpClientFactory.CreateClient();
             var res = await client.GetAsync($"https://localhost:7052/api/Notification/{id}");
@@ -95,6 +95,53 @@ namespace WebUI.Controllers {
             var jsonData = JsonConvert.SerializeObject(updateNotificationDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var res = await client.PutAsync("https://localhost:7052/api/Notification/", stringContent);
+            if (!res.IsSuccessStatusCode) {
+                return View();
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        public async Task<IActionResult> NotificationStatusChangeToTrue(int id) {
+            ViewBag.NotificationTypes = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "1 - notif-icon notif-primary" },
+                new SelectListItem { Value = "2", Text = "2 - notif-icon notif-success" },
+                new SelectListItem { Value = "3", Text = "3 - notif-icon notif-danger" }
+            };
+
+            ViewBag.Icons = new Dictionary<string, string>
+            {
+                 { "1", "la la-user-plus" },
+                 { "2", "la la-comment" },
+                 { "3", "la la-heart" }
+            };
+
+            var client = _httpClientFactory.CreateClient();
+            var res = await client.GetAsync($"https://localhost:7052/api/Notification/NotificationChangeToTrue/{id}");
+            if (!res.IsSuccessStatusCode) {
+                return View();
+            }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> NotificationStatusChangeToFalse(int id) {
+            ViewBag.NotificationTypes = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "1 - notif-icon notif-primary" },
+                new SelectListItem { Value = "2", Text = "2 - notif-icon notif-success" },
+                new SelectListItem { Value = "3", Text = "3 - notif-icon notif-danger" }
+            };
+
+            ViewBag.Icons = new Dictionary<string, string>
+            {
+                 { "1", "la la-user-plus" },
+                 { "2", "la la-comment" },
+                 { "3", "la la-heart" }
+            };
+
+            var client = _httpClientFactory.CreateClient();
+            var res = await client.GetAsync($"https://localhost:7052/api/Notification/NotificationChangeToFalse/{id}");
             if (!res.IsSuccessStatusCode) {
                 return View();
             }

@@ -42,5 +42,13 @@ namespace BusinessLayer.Concrete {
         public List<Notification> TGetAllNotificationByStatusFalse() {
             return _notificationDal.GetAllNotificationByStatusFalse();
         }
+
+        public void TNotificationChangeToTrue(int id) {
+            _notificationDal.NotificationChangeToTrue(id);
+        }
+
+        public void TNotificationChangeToFalse(int id) {
+            _notificationDal.NotificationChangeToFalse(id);
+        }
     }
 }
