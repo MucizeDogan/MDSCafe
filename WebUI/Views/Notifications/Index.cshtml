@@ -26,6 +26,8 @@
                                     <th scope="col">Durum</th>
                                     <th scope="col">Sil</th>
                                     <th scope="col">Güncelle</th>
+                                    <th scope="col">Okundu İşaretle</th>
+                                    <th scope="col">Okunmadı İşaretle</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,12 +41,18 @@
                                             <a href="/Notifications/DeleteNotification/@item.NotificationID" class="btn btn-outline-danger btn-rounded"
                                                onclick="return confirm('@item.Description bu bildirimi silmek istediğinize emin misiniz?')">Sil</a>
                                         </td>
-                                        <td><a href="/Notifications/UpdateNotification/@item.NotificationID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
+                                        <td><a href="/Notifications/UpdateNotification/@item.NotificationID" class="btn btn-outline-warning btn-rounded">Güncelle</a></td>
+                                        <td><a href="/Notifications/NotificationStatusChangeToTrue/@item.NotificationID" class="btn btn-outline-success btn-rounded">Okundu</a></td>
+                                        <td><a href="/Notifications/NotificationStatusChangeToFalse/@item.NotificationID" class="btn btn-outline-secondary btn-rounded">Okunmadı</a></td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
                         <a href="/Notifications/CreateNotification/" class="btn btn-outline-primary">Yeni Bildirim</a>
+                        <span class="col-md-6">
+                            <a href="/Notifications/CreateNotification/" class="btn btn-outline-danger">Okunmuşları SİL</a>
+                        </span>
+                        
                     </div>
                 </div>
             </div>

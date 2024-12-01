@@ -9,5 +9,7 @@ namespace BusinessLayer.Abstract {
     public interface INotificationService :IGenericService<Notification> {
         int TNotificationCountByStatusFalse();
         List<Notification> TGetAllNotificationByStatusFalse();
+        void TNotificationChangeToTrue(int id); // Okundu olarak işaretle
+        void TNotificationChangeToFalse(int id);
     }
 }

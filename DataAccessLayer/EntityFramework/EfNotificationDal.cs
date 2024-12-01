@@ -23,5 +23,23 @@ namespace DataAccessLayer.EntityFramework {
             using var context = new Context();
             return context.Notifications.Where(x=>x.Status==false).Count();
         }
+
+        public void NotificationChangeToTrue(int id) {
+            using var context = new Context();
+            var value = context.Notifications.Find(id);
+            if (value != null) {
+                value.Status = true;
+                context.SaveChanges();
+            }
+        }
+
+        public void NotificationChangeToFalse(int id) {
+            using var context = new Context();
+            var value = context.Notifications.Find(id);
+            if (value != null) {
+                value.Status = false;
+                context.SaveChanges();
+            }
+        }
     }
 }

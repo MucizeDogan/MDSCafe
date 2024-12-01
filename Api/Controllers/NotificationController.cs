@@ -72,5 +72,17 @@ namespace Api.Controllers {
             _notificationService.TUpdate(notification);
             return Ok("Bildirim Güncelleme başarılı");
         }
+
+        [HttpGet("NotificationChangeToFalse/{id}")]
+        public IActionResult NotificationChangeToFalse(int id) {
+            _notificationService.TNotificationChangeToFalse(id);
+            return Ok("Bildirim durumu False olarak güncellendi");
+        }
+
+        [HttpGet("NotificationChangeToTrue/{id}")]
+        public IActionResult NotificationChangeToTrue(int id) {
+            _notificationService.TNotificationChangeToTrue(id);
+            return Ok("Bildirim durumu True olarak güncellendi");
+        }
     }
 }
