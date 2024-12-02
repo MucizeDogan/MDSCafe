@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using Microsoft.AspNetCore.SignalR;
+using System.Runtime.CompilerServices;
 
 namespace Api.Hubs {
     public class SignalRHub : Hub{
@@ -21,6 +22,8 @@ namespace Api.Hubs {
             _bookingService = bookingService;
             _notificationService = notificationService;
         }
+
+        public static int clientCount { get; set; } = 0;
 
         public async Task SendStatistics() {  
             var value = _categoryService.TCategoryCount();
@@ -103,6 +106,17 @@ namespace Api.Hubs {
 
         public async Task SendMessage(string user, string message) {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+
+        public override async Task OnConnectedAsync() { // Client a bağlı olan client sayısını getiriyor.
+            clientCount++;
+            await Clients.All.SendAsync("ReceiveClientCount", clientCount);
+            await base.OnConnectedAsync();
+        }
+        public override async Task OnDisconnectedAsync(Exception? exception) {
+            clientCount--;
+            await Clients.All.SendAsync("ReceiveClientCount", clientCount);
+            await base.OnDisconnectedAsync(exception);
         }
     }
 }

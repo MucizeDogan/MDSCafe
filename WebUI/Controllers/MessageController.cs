@@ -5,5 +5,9 @@ namespace WebUI.Controllers {
         public IActionResult Index() {
             return View();
         }
+
+        public IActionResult ClientUserCount() {
+            return View();
+        }
     }
 }
