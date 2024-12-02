@@ -16,7 +16,7 @@ namespace BusinessLayer.Concrete {
         }
 
         public void TAdd(CafeTable entity) {
-            throw new NotImplementedException();
+            _cafeTableDal.Add(entity);
         }
 
         public int TCafeTableCount() {
@@ -24,19 +24,19 @@ namespace BusinessLayer.Concrete {
         }
 
         public void TDelete(CafeTable entity) {
-            throw new NotImplementedException();
+             _cafeTableDal.Delete(entity);
         }
 
         public CafeTable TGetById(int id) {
-            throw new NotImplementedException();
+             return _cafeTableDal.GetById(id);
         }
 
         public List<CafeTable> TGetListAll() {
-            throw new NotImplementedException();
+             return _cafeTableDal.GetListAll();
         }
 
         public void TUpdate(CafeTable entity) {
-            throw new NotImplementedException();
+             _cafeTableDal.Update(entity);
         }
     }
 }
