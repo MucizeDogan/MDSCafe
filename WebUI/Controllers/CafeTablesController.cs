@@ -72,7 +72,6 @@ namespace WebUI.Controllers {
             return RedirectToAction("Index");
         }
 
-        [HttpGet("TableListByStatus")]
         public async Task<IActionResult> TableListByStatus() {
             var client = _httpClientFactory.CreateClient(); // Bir istemci oluşturdum.
             var res = await client.GetAsync("https://localhost:7052/api/CafeTables"); // İstekte bulunacağımız apinin url sini yazıyoruz

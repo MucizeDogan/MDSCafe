@@ -96,5 +96,10 @@ namespace Api.Hubs {
             await Clients.All.SendAsync("ReceiveNotificationListByFalse", value2);
         }
 
+        public async Task GetMenuTableStatus() {
+            var value = _cafeTableService.TGetListAll();
+            await Clients.All.SendAsync("ReceiveCafeTableStatus", value);
+        }
+
     }
 }

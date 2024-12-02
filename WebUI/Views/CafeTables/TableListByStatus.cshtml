@@ -1,8 +1,94 @@
-﻿
+﻿@model List<ResultCafeTableDto>
 @{
     ViewData["Title"] = "TableListByStatus";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
 
+<div class="content">
+    <div class="container-fluid">
+
+        <script type="text/javascript">
+
+            $(document).ready(() => {
+
+                var conn = new signalR.HubConnectionBuilder().withUrl("https://localhost:7052/SignalRHub").build();
+                $("#connstatus").text(conn.state);
+
+                conn.start().then(() => {
+                    $("#connstatus").text(conn.state);
+                    //Set Interval metodu bizim sayfayı yenilemeden verilerimizin güncellemesini sağlayacak
+                    setInterval(() => { // SetInterval metodu bir aralık ayarlayacak, Bağlantıyı belli periyotlara düşürecek
+                        conn.invoke("GetMenuTableStatus"); //Conn.invoke ile SendCategoryCount metoduna istekte bulunduk
+
+
+                    }, 1000);   //Her 1 saniyede bir istekte bulunacak
+
+                }).catch((err) => { console.log(err) });
+
+                conn.on("ReceiveCafeTableStatus", (value) => {
+                    var color = "";
+                    var status = "";
+                    var icon = "";
+                    let tablehtml;
+                    tablehtml = `<div class="row">`
+                    $.each(value, (index, item) => {
+                        if (item.status == true) {
+                            color = "card card-stats card-danger";
+                            status = "DOLU";
+                            icon = "la la-shopping-cart";
+
+                        } else {
+                            color = "card card-stats card-success";
+                            status = "BOŞ";
+                            icon = "la la-user";
+                        }
+                        tablehtml += `<div class="col-md-3">
+                                <div class="${color}">
+                                <div class="card-body ">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="icon-big text-center">
+                                                <i class="${icon}"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-7 d-flex align-items-center">
+                                            <div class="numbers">
+                                                <h6 class="card-group">${item.name}</h6>
+                                                <h4 class="card-category">${status}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`
+                    });
+                    tablehtml += "</div>";
+                    $("#tablesstatuslist").html(tablehtml);
+                });
+
+            });
+
+        </script>
+
+        <h4 class="page-title">Anlık Masa Durumları</h4>
+
+        
+           @*  @foreach (var item in Model) { *@
+                @* if(item.Status == false) {
+                    colorClass = "card card-stats card-danger";
+                    status = "BOŞ";
+                }else {
+                    colorClass = "card card-stats card-success";
+                    status = "DOLU";
+                } *@
+            <div id="tablesstatuslist"></div>
+            @* } *@
+        
+    </div>
+</div>
 
