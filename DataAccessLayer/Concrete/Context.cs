@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete {
-    public class Context : DbContext {
+    public class Context : IdentityDbContext<AppUser,AppRole,int> {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             optionsBuilder.UseSqlServer("Server=DESKTOP-RHMNBG1\\SQLEXPRESS;initial Catalog=MDSCafe;integrated Security=true");
         }
