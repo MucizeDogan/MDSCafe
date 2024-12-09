@@ -1,45 +1,84 @@
-﻿@model RegisterDto
+﻿@* @model RegisterDto
 @{
     Layout = null;
 }
 
-<!DOCTYPE html>
-<html>
 <head>
-	<meta charset="utf-8">
-	<title>MDS Cafe Kayıt</title>
-	<!-- Mobile Specific Metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<!-- Font-->
-	<link rel="stylesheet" type="text/css" href="~/colorlib-regform-32/css/nunito-font.css">
-	<!-- Main Style Css -->
-	<link rel="stylesheet" href="~/colorlib-regform-32/css/style.css" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewData["Title"]</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/site2.css" rel="stylesheet">
 </head>
-<body class="form-v12">
-	<div class="page-content">
-		<div class="form-v6-content">
-			<form class="form-detail" method="post">
-				<h2>Yeni Kullanıcı Kaydı</h2>
-				<div class="form-row">
-					<input type="text" id="full-name" asp-for="Name" class="input-text" placeholder="Adınız" required>
-				</div>
-				<div class="form-row">
-					<input type="text"id="full-name" class="input-text" placeholder="Soyadınız" required asp-for="Surname">
-				</div>
-				<div class="form-row">
-					<input type="text"id="full-name" class="input-text" placeholder="Kullanıcı Adınız" required asp-for="Username">
-				</div>
-				<div class="form-row">
-					<input type="text" id="your-email" class="input-text" placeholder="Email  Addresiniz" asp-for="Mail" required pattern="[^@@]+@@[^@@]+.[a-zA-Z]{2,6}">
-				</div>
-				<div class="form-row">
-					<input type="password" id="password" class="input-text" placeholder="Şifreniz" asp-for="Password" required>
-				</div>
-				<div class="form-row-last">
-					<button class="register">Kayıt Ol</button>
-				</div>
-			</form>
-		</div>
+<body>
+	<div class="login-container">
+		<h1>Giriş Yap</h1>
+		<form method="post">
+
+			<input type="text" id="full-name" asp-for="Name" class="form-control" placeholder="Adınız" required>
+
+			<input type="text" id="full-name" class="form-control" placeholder="Soyadınız" required asp-for="Surname">
+
+			<input type="text" id="full-name" class="form-control" placeholder="Kullanıcı Adınız" required asp-for="Username">
+
+			<input type="text" id="your-email" class="form-control" placeholder="Email Adresiniz" asp-for="Mail" required pattern="[^@@]+@@[^@@]+.[a-zA-Z]{2,6}">
+
+			<input type="password" id="password" class="form-control" placeholder="Şifreniz" asp-for="Password" required>
+			
+			<button class="btn btn-primary">Kayıt Ol</button>
+
+		</form>
 	</div>
+</body>
+</html> *@
+
+@model RegisterDto
+@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/site2.css" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Kayıt Ol</h1>
+        <form method="post">
+            @if (ViewBag.Errors != null)
+            {
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach (var error in ViewBag.Errors)
+                        {
+                            <li>@error</li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <input type="text" id="full-name" asp-for="Name" class="form-control" placeholder="Adınız" required>
+            <input type="text" id="full-name" asp-for="Surname" class="form-control" placeholder="Soyadınız" required>
+            <input type="text" id="full-name" asp-for="Username" class="form-control" placeholder="Kullanıcı Adınız" required>
+            <input type="text" id="your-email" asp-for="Mail" class="form-control" placeholder="Email Adresiniz" required pattern="[^@@]+@@[^@@]+.[a-zA-Z]{2,6}">
+            <input type="password" id="password" asp-for="Password" class="form-control" placeholder="Şifreniz" required>
+            
+            <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+        </form>
+
+        @* <div class="password-policy mt-3">
+            <h6>Parola Gereksinimleri:</h6>
+            <ul>
+                <li>En az 6 karakter uzunluğunda olmalıdır.</li>
+                <li>Bir büyük harf içermelidir (A-Z).</li>
+                <li>Bir küçük harf içermelidir (a-z).</li>
+                <li>Bir rakam içermelidir (0-9).</li>
+                <li>Bir özel karakter içermelidir (!, vb.).</li>
+            </ul>
+        </div> *@
+    </div>
 </body>
 </html>

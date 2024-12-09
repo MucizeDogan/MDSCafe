@@ -28,7 +28,8 @@ namespace WebUI.Controllers {
             if (result.Succeeded) {
                 return RedirectToAction("Index", "Login");
             }
-            return View();
+			ViewBag.Errors = result.Errors.Select(e => e.Description).ToList();
+			return View();
         }
     }
 }
