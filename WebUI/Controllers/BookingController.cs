@@ -28,6 +28,7 @@ namespace WebUI.Controllers {
         }
         [HttpPost]
         public async Task<IActionResult> CreateBooking(CreateBookingDto createBookingDto) {
+            createBookingDto.Description = "Rezervasyon Alındı";
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBookingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -61,6 +62,7 @@ namespace WebUI.Controllers {
 
         [HttpPost]
         public async Task<IActionResult> UpdateBooking(UpdateBookingDto updateBookingDto) {
+            //updateBookingDto.Description = "";
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateBookingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -68,6 +70,18 @@ namespace WebUI.Controllers {
             if (!res.IsSuccessStatusCode) {
                 return View();
             }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> BookingStatusApproved(int id) {
+            var client = _httpClientFactory.CreateClient(); // Bir istemci oluşturdum.
+            var res = await client.GetAsync($"https://localhost:7052/api/Booking/BookingStatusApproved/{id}"); // İstekte bulunacağımız apinin url sini yazıyoruz
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> BookingStatusCancelled(int id) {
+            var client = _httpClientFactory.CreateClient(); // Bir istemci oluşturdum.
+            await client.GetAsync($"https://localhost:7052/api/Booking/BookingStatusCancelled/{id}"); // İstekte bulunacağımız apinin url sini yazıyoruz
             return RedirectToAction("Index");
         }
     }
