@@ -47,16 +47,16 @@
                                                  <tbody>`
                     $.each(value, (index, item) => {
                         tablehtml += `<tr>
-                                                <th>${index + 1}</th>
+                                                <th>${index+1}</th>
                                                 <td>${item.name}</td>
                                                 <td>${item.phone}</td>
                                                 <td>${item.personCount}</td>
                                                 <td>${item.description}</td>
-                                                <td><a href="/Booking/DeleteBooking/${item.BookingID}" class="btn btn-outline-danger btn-rounded"
+                                                <td><a href="/Booking/DeleteBooking/${item.bookingID}" class="btn btn-outline-danger btn-rounded"
                                                 onclick="return confirm('Bu Rezervasyonu silmek istediğinize emin misiniz?')">Sil</a></td>
-                                                <td><a href="/Booking/UpdateBooking/${item.bookingID}" class="btn btn-outline-success">Güncelle</a></td>
+                                                <td><a href="/Booking/UpdateBooking/${item.bookingID}" class="btn btn-outline-success btn-                          rounded">Güncelle</a></td>
                                                 <td><a href="/Booking/BookingStatusApproved/${item.bookingID}" class="btn btn-outline-info">Onayla</a></td>
-                                                <td><a href="/Booking/BookingStatusCancelled/${item.bookingID}" class="btn btn-outline-dark">İptal Et</a></td>
+                                                <td><a href="/Booking/BookingStatusCancelled/${item.bookingID}" class="btn btn-outline-dark">İptal Et</a></         td>
                                                 </tr>`
                     });
                     tablehtml += "</tbody></table>";

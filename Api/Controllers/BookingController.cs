@@ -28,7 +28,8 @@ namespace Api.Controllers {
                 Mail = createBookingDto.Mail,
                 Name = createBookingDto.Name,
                 PersonCount = createBookingDto.PersonCount,
-                Phone = createBookingDto.Phone
+                Phone = createBookingDto.Phone,
+                Description = "Rezervasyon Alındı"
             };
             _bookingService.TAdd(booking);
             return Ok("Rezervasyon yapıldı");
@@ -49,7 +50,8 @@ namespace Api.Controllers {
                 Date = updateBookingDto.Date,
                 Name = updateBookingDto.Name,
                 Phone = updateBookingDto.Phone,
-                PersonCount=updateBookingDto.PersonCount
+                PersonCount=updateBookingDto.PersonCount,
+                Description = updateBookingDto.Description
             };
             _bookingService.TUpdate(booking);
             return Ok("Rezervasyon güncellendi");
@@ -60,5 +62,18 @@ namespace Api.Controllers {
             var value = _bookingService.TGetById(id);
             return Ok(value);
         }
+
+        [HttpGet("BookingStatusApproved/{id}")]
+        public IActionResult BookingStatusApproved(int id) {
+            _bookingService.TBookingStatusApproved(id);
+            return Ok("Rezervasyon Açıklaması Onaylandı olarak değiştirildi");
+        }
+
+        [HttpGet("BookingStatusCancelled/{id}")]
+        public IActionResult BookingStatusCancelled(int id) {
+            _bookingService.TBookingStatusCancelled(id);
+            return Ok("Rezervasyon Açıklaması İptal Edildi olarak değiştirildi");
+        }
+
     }
 }
