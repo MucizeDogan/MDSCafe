@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WebUI.Dtos.SliderDto {
-    public class ResultSliderDto {
+    public class UpdateSliderDto {
         public int SliderID { get; set; }
         public string Title1 { get; set; }
         public string Title2 { get; set; }
