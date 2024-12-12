@@ -31,6 +31,7 @@ namespace Api.Controllers {
                 Description = createDiscountDto.Description,
                 ImageUrl=createDiscountDto.ImageUrl,    
                 Title = createDiscountDto.Title,
+                Status = false
             });
             return Ok("Başarıyla eklendi");
         }
@@ -49,7 +50,8 @@ namespace Api.Controllers {
                 Amount = updateDiscountDto.Amount,
                 Description = updateDiscountDto.Description,
                 ImageUrl = updateDiscountDto.ImageUrl,
-                Title = updateDiscountDto.Title
+                Title = updateDiscountDto.Title,
+                Status = false
             });
             return Ok("Başarıyla güncellendi");
         }
@@ -59,5 +61,17 @@ namespace Api.Controllers {
             var value = _discountService.TGetById(id);
             return Ok(value);
         }
+
+        [HttpGet("ChangeStatusToTrue/{id}")]
+        public IActionResult ChangeStatusToTrue(int id) {
+            _discountService.TChangeStatusToTrue(id);
+            return Ok("Ürün İndirimi Aktif");
+        }
+        [HttpGet("ChangeStatusToFalse/{id}")]
+        public IActionResult ChangeStatusToFalse(int id) {
+            _discountService.TChangeStatusToFalse(id);
+            return Ok("Ürün İndirimi Pasif");
+        }
+
     }
 }

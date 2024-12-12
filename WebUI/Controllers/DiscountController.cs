@@ -70,5 +70,17 @@ namespace WebUI.Controllers {
             }
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> ChangeStatusToTrue(int id) {
+            var client = _httpClientFactory.CreateClient(); // Bir istemci oluşturdum.
+            await client.GetAsync($"https://localhost:7052/api/Discount/ChangeStatusToTrue/{id}"); // İstekte bulunacağımız apinin url sini yazıyoruz
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> ChangeStatusToFalse(int id) {
+            var client = _httpClientFactory.CreateClient(); // Bir istemci oluşturdum.
+            await client.GetAsync($"https://localhost:7052/api/Discount/ChangeStatusToFalse/{id}"); // İstekte bulunacağımız apinin url sini yazıyoruz
+            return RedirectToAction("Index");
+        }
     }
 }
