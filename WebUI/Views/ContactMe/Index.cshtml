@@ -21,7 +21,6 @@
                         <table class="table mt-3">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
                                     <th scope="col">Adres</th>
                                     <th scope="col">Telefon</th>
                                     <th scope="col">Mail</th>
@@ -33,8 +32,7 @@
                             <tbody>
                                 @foreach (var item in Model) {
                                     <tr>
-                                        <td>@item.ContactMeID</td>
-                                        <td>@item.Location</td>
+                                        <td>@item.Location.Substring(0,50) --- Kısaltılmıştır</td>
                                         <td>@item.Phone</td>
                                         <td>@item.Mail</td>
                                         <td>@item.FooterDescription</td>

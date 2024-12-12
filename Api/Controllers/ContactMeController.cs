@@ -30,7 +30,11 @@ namespace Api.Controllers {
                 FooterDescription=createContactMeDto.FooterDescription,
                 Location=createContactMeDto.Location,
                 Mail=createContactMeDto.Mail,
-                Phone=createContactMeDto.Phone
+                Phone=createContactMeDto.Phone,
+                FooterTitle = createContactMeDto.FooterTitle,
+                OpenDays =createContactMeDto.OpenDays,
+                OpenDaysDescription=createContactMeDto.OpenDaysDescription,
+                OpenHours =createContactMeDto.OpenHours
             });
             return Ok("Başarıyla eklendi");
         }
@@ -49,7 +53,11 @@ namespace Api.Controllers {
                 FooterDescription = updateContactMeDto.FooterDescription,
                 Location = updateContactMeDto.Location,
                 Mail = updateContactMeDto.Mail,
-                Phone = updateContactMeDto.Phone
+                Phone = updateContactMeDto.Phone, 
+                FooterTitle = updateContactMeDto.FooterTitle,
+                OpenDays = updateContactMeDto.OpenDays,
+                OpenDaysDescription = updateContactMeDto.OpenDaysDescription,
+                OpenHours = updateContactMeDto.OpenHours
             });
             return Ok("Başarıyla güncellendi");
         }
