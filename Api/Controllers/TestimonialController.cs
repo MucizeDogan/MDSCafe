@@ -31,7 +31,7 @@ namespace Api.Controllers {
                 ImageUrl = createTestimonialDto.ImageUrl,
                 Title = createTestimonialDto.Title,
                 Name = createTestimonialDto.Name,
-                Status = createTestimonialDto.Status,
+                Status = false,
             });
             return Ok("Başarıyla eklendi");
         }
