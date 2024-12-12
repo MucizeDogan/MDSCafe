@@ -1,7 +1,8 @@
-﻿@model List<ResultFeatureDto>
+﻿@model List<ResultSliderDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
 }
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -47,21 +48,21 @@
                             <tbody>
                                 @foreach (var item in Model) {
                                     <tr>
-                                        <td>@item.FeatureID</td>
+                                        <td>@item.SliderID</td>
                                         <td>@item.Title1</td>
                                         <td>@item.Title2</td>
                                         <td>@item.Title3</td>
                                         <td>@item.Description1</td>
                                         <td>@item.Description2</td>
                                         <td>@item.Description3</td>
-                                        <td><a href="/Feature/DeleteFeature/@item.FeatureID" class="btn btn-outline-danger btn-rounded"
+                                        <td><a href="/Slider/DeleteSlider/@item.SliderID" class="btn btn-outline-danger btn-rounded"
                                         onclick="return confirm('silmek istediğinize emin misiniz?')">Sil</a></td>
-                                        <td><a href="/Feature/UpdateFeature/@item.FeatureID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
+                                        <td><a href="/Slider/UpdateSlider/@item.SliderID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <a href="/Feature/CreateFeature/" class="btn btn-outline-primary">Yeni Öne Çıkan Alan</a> *@
+                        <a href="/Slider/CreateSlider/" class="btn btn-outline-primary">Yeni Öne Çıkan Alan</a> *@
 
 
                             <table class="table table-head-bg-success table-striped table-hover">
@@ -80,8 +81,9 @@
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model) {
+                                    count++;
                                     <tr>
-                                        <td>@item.FeatureID</td>
+                                        <th>@count</th>
                                         <td>@item.Title1</td>
                                         <td>@item.Title2</td>
                                         <td>@item.Title3</td>
@@ -89,10 +91,10 @@
                                         <td>@item.Description2</td>
                                         <td>@item.Description3</td>
                                         <td>
-                                            <a href="/Feature/DeleteFeature/@item.FeatureID" class="btn btn-outline-danger btn-rounded"
+                                            <a href="/Sliders/DeleteSlider/@item.SliderID" class="btn btn-outline-danger btn-rounded"
                                                onclick="return confirm('silmek istediğinize emin misiniz?')">Sil</a>
                                         </td>
-                                        <td><a href="/Feature/UpdateFeature/@item.FeatureID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
+                                        <td><a href="/Sliders/UpdateSlider/@item.SliderID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
                                     </tr>
                                 }
                                 </tbody>
