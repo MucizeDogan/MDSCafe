@@ -2,8 +2,16 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+    string durum = "";
 }
-
+<head>
+    
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+</head>
 <div class="content">
     <div class="container-fluid">
         <h4 class="page-title">Referans Yorum İşlemleri</h4>
@@ -17,7 +25,7 @@
                         <div class="card-sub">
                           Müşterilerin yaptığı yorumlarla ilgili işlemleri aşağıdan gerçekleştirebilirsiniz.
                         </div>
-                        <table class="table mt-3">
+                        <table class="table table-head-bg-success table-striped table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -30,11 +38,13 @@
                             </thead>
                             <tbody>
                                 @foreach (var item in Model) {
+                                    if (item.Status) durum = "Aktif"; else durum = "Pasif";
+                                    count++;
                                     <tr>
-                                        <td>@item.TestimonialID</td>
+                                        <td>@count</td>
                                         <td>@item.Name</td>
                                         <td>@item.Comment</td>
-                                        <td>@item.Status</td>
+                                        <td>@durum</td>
                                         <td><a href="/Testimonial/DeleteTestimonial/@item.TestimonialID" class="btn btn-outline-danger btn-rounded"
                                         onclick="return confirm('@item.Name Adlı kişinin yorumunu silmek istediğinize emin misiniz?')">Sil</a></td>
                                         <td><a href="/Testimonial/UpdateTestimonial/@item.TestimonialID" class="btn btn-outline-success btn-rounded">Güncelle</a></td>
