@@ -1,0 +1,12 @@
+
+---*** Proje bittikten sonra ekleme yapacaðým iþlemler ***---
+	-Sepete signalR uygulama
+	-Default/Index de sepete ekleme iþlemini gerçekleþtirme
+	-Sepete eklenince sayfanýn en baþýna çýkma sorunu
+	-Ayný üründen bir daha ekleyince yeni satýr oluþturma sorunu
+
+
+
+
+ 
+
