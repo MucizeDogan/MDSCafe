@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 using WebUI.Dtos.BookingDto;
 
 namespace WebUI.Controllers {
     public class BookATableController : Controller {
+        [AllowAnonymous]
 
         private readonly IHttpClientFactory _httpClientFactory;
         public BookATableController(IHttpClientFactory httpClientFactory) {
