@@ -1,12 +1,17 @@
 using DataAccessLayer.Concrete;
 using EntityLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build(); //Auth olmuþ kullanýcýyý zorunlu kýl
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<Context>();
 
 builder.Services.AddHttpClient();
 
@@ -14,7 +19,13 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<Context>();
 
-builder.Services.AddDbContext<Context>();
+builder.Services.AddControllersWithViews(opt => {
+    opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy)); // Bütün controllerlarýn içerisine authorize iþlemini filtrele
+});
+
+builder.Services.ConfigureApplicationCookie(opts => {
+    opts.LoginPath = "/Login/Index";
+});
 
 var app = builder.Build();
 
@@ -31,6 +42,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",

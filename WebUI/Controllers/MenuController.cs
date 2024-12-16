@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 using WebUI.Dtos.BasketDto;
 using WebUI.Dtos.ProductDto;
 
 namespace WebUI.Controllers {
+    [AllowAnonymous]
     public class MenuController : Controller {
         private readonly IHttpClientFactory _httpClientFactory;
 
