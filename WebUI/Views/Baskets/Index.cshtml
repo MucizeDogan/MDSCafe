@@ -4,6 +4,7 @@
     int count = 0;
     decimal basketTotalPrice = 0;
     decimal KDV = 10;
+    decimal taxPrice=0;
     decimal totalPriceWithTax = 0;
 }
 
@@ -50,6 +51,7 @@
                     @foreach (var item in Model) {
                         basketTotalPrice = Model.Sum(x => x.Price);
                         totalPriceWithTax = basketTotalPrice * (1 + KDV / 100);
+                        taxPrice = totalPriceWithTax - basketTotalPrice;
                         count++;
                         <tbody class="align-middle">
                             <tr>
@@ -88,7 +90,7 @@
                         <hr />
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="text-muted mb-0">KDV Oranı</h6>
-                            <h6 id="kdv" class="font-weight-bold text-secondary mb-0">@KDV%</h6>
+                            <h6 id="kdv" class="font-weight-bold text-secondary mb-0">@taxPrice TL</h6>
                         </div>
                         <hr />
                         <h5 class="text-center mt-4">
