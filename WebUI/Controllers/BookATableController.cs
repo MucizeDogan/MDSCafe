@@ -5,8 +5,8 @@ using System.Text;
 using WebUI.Dtos.BookingDto;
 
 namespace WebUI.Controllers {
+    [AllowAnonymous]
     public class BookATableController : Controller {
-        [AllowAnonymous]
 
         private readonly IHttpClientFactory _httpClientFactory;
         public BookATableController(IHttpClientFactory httpClientFactory) {
