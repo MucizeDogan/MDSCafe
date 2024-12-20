@@ -27,5 +27,10 @@ namespace WebUI.Controllers {
 			ViewBag.ErrorMessage = "Geçersiz kullanıcı adı veya şifre.";
 			return View();
 		}
+
+		public async Task<IActionResult> LogOut() {
+			await _signInManager.SignOutAsync();
+			return RedirectToAction("Index", "Login");
+		}
 	}
 }
