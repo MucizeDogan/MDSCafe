@@ -84,6 +84,15 @@ namespace Api.Hubs {
 
             var value3 = _cafeTableService.TCafeTableCount();
             await Clients.All.SendAsync("ReceiveCafeTableCount", value3);
+
+            var value5 = Convert.ToInt32(_productService.TProductPriceAvg());
+            await Clients.All.SendAsync("ReceiveProductPriceAvg", value5);
+
+            var value6 = Convert.ToInt32(_productService.THamburgerAvg());
+            await Clients.All.SendAsync("ReceiveHamburgerAvgAvg", value6);
+
+            var value7 = Convert.ToInt32(_productService.TProductCountByCategoryNameDrink());
+            await Clients.All.SendAsync("ReceiveDrinkCount", value7);
         }
 
         public async Task GetBookingList() {
