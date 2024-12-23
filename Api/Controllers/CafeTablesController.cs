@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using DtoLayer.CafeTableDto;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Http;
@@ -9,9 +10,11 @@ namespace Api.Controllers {
     [ApiController]
     public class CafeTablesController : ControllerBase {
         private readonly ICafeTableService _cafeTableService;
+        private readonly IMapper _mapper;
 
-        public CafeTablesController(ICafeTableService cafeTableService) {
+        public CafeTablesController(ICafeTableService cafeTableService, IMapper mapper) {
             _cafeTableService = cafeTableService;
+            _mapper = mapper;
         }
 
         [HttpGet("CafeTableCount")]
@@ -22,16 +25,14 @@ namespace Api.Controllers {
         [HttpGet]
         public IActionResult ListCafeTable() {
             var values = _cafeTableService.TGetListAll();
-            return Ok(values);
+            return Ok(_mapper.Map<List<ResultCafeTableDto>>(values));
         }
 
         [HttpPost]
         public IActionResult CreateCafeTable(CreateCafeTableDto createCafeTableDto) {
-            CafeTable cafeTable = new CafeTable() {
-                Name = createCafeTableDto.Name,
-                Status = false
-            };
-            _cafeTableService.TAdd(cafeTable);
+            createCafeTableDto.Status = false;
+            var value = _mapper.Map<CafeTable>(createCafeTableDto);
+            _cafeTableService.TAdd(value);
             return Ok("Yeni Masa başarılı bir şekilde eklendi");
         }
 
@@ -44,19 +45,15 @@ namespace Api.Controllers {
 
         [HttpPut]
         public IActionResult UpdateCafeTable(UpdateCafeTableDto updateCafeTableDto) {
-            CafeTable cafeTable = new CafeTable() {
-                CafeTableID = updateCafeTableDto.CafeTableID,
-                Name = updateCafeTableDto.Name,
-                Status = updateCafeTableDto.Status
-            };
-            _cafeTableService.TUpdate(cafeTable);
+            var value = _mapper.Map<CafeTable>(updateCafeTableDto);
+            _cafeTableService.TUpdate(value);
             return Ok("Masa başarıyla güncellendi");
         }
 
         [HttpGet("{id}")]
         public IActionResult GetCafeTable(int id) {
             var value = _cafeTableService.TGetById(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetCafeTableDto>(value));
         }
     }
 }

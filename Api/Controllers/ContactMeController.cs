@@ -25,17 +25,9 @@ namespace Api.Controllers {
 
         [HttpPost]
         public IActionResult CreateContactMe(CreateContactMeDto createContactMeDto) {
-              
-            _contactMeService.TAdd(new ContactMe() {
-                FooterDescription=createContactMeDto.FooterDescription,
-                Location=createContactMeDto.Location,
-                Mail=createContactMeDto.Mail,
-                Phone=createContactMeDto.Phone,
-                FooterTitle = createContactMeDto.FooterTitle,
-                OpenDays =createContactMeDto.OpenDays,
-                OpenDaysDescription=createContactMeDto.OpenDaysDescription,
-                OpenHours =createContactMeDto.OpenHours
-            });
+
+            var value = _mapper.Map<ContactMe>(createContactMeDto);
+            _contactMeService.TAdd(value);
             return Ok("Başarıyla eklendi");
         }
 
@@ -48,24 +40,15 @@ namespace Api.Controllers {
 
         [HttpPut]
         public IActionResult UpdateContactMe(UpdateContactMeDto updateContactMeDto) {
-            _contactMeService.TUpdate(new ContactMe() {
-                ContactMeID = updateContactMeDto.ContactMeID,
-                FooterDescription = updateContactMeDto.FooterDescription,
-                Location = updateContactMeDto.Location,
-                Mail = updateContactMeDto.Mail,
-                Phone = updateContactMeDto.Phone, 
-                FooterTitle = updateContactMeDto.FooterTitle,
-                OpenDays = updateContactMeDto.OpenDays,
-                OpenDaysDescription = updateContactMeDto.OpenDaysDescription,
-                OpenHours = updateContactMeDto.OpenHours
-            });
+            var value = _mapper.Map<ContactMe>(updateContactMeDto);
+            _contactMeService.TUpdate(value);
             return Ok("Başarıyla güncellendi");
         }
 
         [HttpGet("{id}")]
         public IActionResult GetContactMe(int id) { 
             var value = _contactMeService.TGetById(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetContactMeDto>(value));
         }
     }
 }
