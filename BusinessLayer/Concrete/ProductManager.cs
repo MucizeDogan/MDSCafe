@@ -37,6 +37,10 @@ namespace BusinessLayer.Concrete {
             return _productDal.GetListAll();
         }
 
+        public List<Product> TGetProductsPriceOver50() {
+            return _productDal.GetProductsPriceOver50();
+        }
+
         public List<ResultProductWithCategory> TGetProductsWithCategories() {
             return _productDal.GetProductsWithCategories();
         }

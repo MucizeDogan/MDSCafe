@@ -68,5 +68,14 @@ namespace DataAccessLayer.EntityFramework {
             using var context = new Context();
             return context.Products.Where(x => x.CategoryID == 2).Average(y => y.Price);
         }
+
+        public List<Product> GetProductsPriceOver50() {
+            using var context = new Context();
+            var values = context.Products
+                                .Where(x => x.ProductStatus == true && x.Price >= 50)
+                                .Take(9)
+                                .ToList();
+            return values;
+        }
     }
 }
