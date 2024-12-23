@@ -27,33 +27,27 @@ namespace Api.Controllers {
 
         [HttpGet("ListProductWithCategory")]
         public IActionResult ListProductWithCategory() {
-            //var values = _mapper.Map<List<ResultProductWithCategory>>(_productService.TGetProductsWithCategories());
-            //return Ok(values);
+            var values = _mapper.Map<List<ResultProductWithCategory>>(_productService.TGetProductsWithCategories());
+            return Ok(values);
 
-            var context = new Context();
-            var values = context.Products.Include(x => x.Category).Select(y => new ResultProductWithCategory {
-                Description = y.Description,
-                ImageUrl = y.ImageUrl,
-                Price = y.Price,
-                ProductName = y.ProductName,
-                ProductID = y.ProductID,
-                ProductStatus = y.ProductStatus,
-                CategoryName = y.Category.CategoryName
-            });
-            return Ok(values.ToList());
+            //var context = new Context();
+            //var values = context.Products.Include(x => x.Category).Select(y => new ResultProductWithCategory {
+            //    Description = y.Description,
+            //    ImageUrl = y.ImageUrl,
+            //    Price = y.Price,
+            //    ProductName = y.ProductName,
+            //    ProductID = y.ProductID,
+            //    ProductStatus = y.ProductStatus,
+            //    CategoryName = y.Category.CategoryName
+            //});
+            //return Ok(values.ToList());
         }
 
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto) {
 
-            _productService.TAdd(new Product() {
-                Description = createProductDto.Description,
-                ImageUrl = createProductDto.ImageUrl,
-                Price = createProductDto.Price,
-                ProductName = createProductDto.ProductName,
-                ProductStatus = createProductDto.ProductStatus,
-                CategoryID=createProductDto.CategoryID
-            });
+            var value = _mapper.Map<Product>(createProductDto);
+            _productService.TAdd(value);
             return Ok("Başarıyla eklendi");
         }
 
@@ -66,22 +60,15 @@ namespace Api.Controllers {
 
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDto updateProductDto) {
-            _productService.TUpdate(new Product() {
-                ProductID=updateProductDto.ProductID,
-                Description = updateProductDto.Description,
-                ImageUrl = updateProductDto.ImageUrl,
-                Price = updateProductDto.Price,
-                ProductName = updateProductDto.ProductName,
-                ProductStatus = updateProductDto.ProductStatus,
-                CategoryID = updateProductDto.CategoryID
-            });
+            var value = _mapper.Map<Product>(updateProductDto);
+            _productService.TUpdate(value);
             return Ok("Başarıyla güncellendi");
         }
 
         [HttpGet("{id}")]
         public IActionResult GetProduct(int id) {
             var value = _productService.TGetById(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetProductDto>(value));
         }
 
         [HttpGet("ProductCount")] // ürün sayısı

@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using DtoLayer.NotificationDto;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Http;
@@ -9,14 +10,16 @@ namespace Api.Controllers {
     [ApiController]
     public class NotificationController : ControllerBase {
         private readonly INotificationService _notificationService;
+        private readonly IMapper _mapper;
 
-        public NotificationController(INotificationService notificationService) {
+        public NotificationController(INotificationService notificationService, IMapper mapper) {
             _notificationService = notificationService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult GetNotificationList() {
-            return Ok(_notificationService.TGetListAll());
+            return Ok(_mapper.Map<List<ResultNotificationDto>>(_notificationService.TGetListAll()));
         }
 
         [HttpGet("NotificationCountByStatusFalse")]
@@ -31,16 +34,10 @@ namespace Api.Controllers {
 
         [HttpPost]
         public IActionResult CreateNotification(CreateNotificationDto createNotificationDto) {
-            Notification notification = new Notification() {
-                Description = createNotificationDto.Description,
-                Icon = createNotificationDto.Icon,
-                Status = false,
-                NotificationType = createNotificationDto.NotificationType,
-                NotificationTypeText = createNotificationDto.NotificationTypeText,
-                Date = Convert.ToDateTime(DateTime.Now.ToShortDateString())
-
-            };
-            _notificationService.TAdd(notification);
+            createNotificationDto.Status = false;
+            createNotificationDto.Date = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            var value = _mapper.Map<Notification>(createNotificationDto);
+            _notificationService.TAdd(value);
             return Ok("Yeni bildirim ekleme başarılı");
         }
 
@@ -54,22 +51,13 @@ namespace Api.Controllers {
         [HttpGet("{id}")]
         public IActionResult GetNotification(int id) {
             var value = _notificationService.TGetById(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetNotificationDto>(value));
         }
 
         [HttpPut]
         public IActionResult UpdateNotification(UpdateNotificationDto updateNotificationDto) {
-            Notification notification = new Notification() {
-                NotificationID = updateNotificationDto.NotificationID,
-                Description = updateNotificationDto.Description,
-                Icon = updateNotificationDto.Icon,
-                Status = updateNotificationDto.Status,
-                NotificationType = updateNotificationDto.NotificationType,
-                NotificationTypeText = updateNotificationDto.NotificationTypeText,
-                Date = Convert.ToDateTime(updateNotificationDto.Date.ToShortDateString())
-
-            };
-            _notificationService.TUpdate(notification);
+            var value = _mapper.Map<Notification>(updateNotificationDto);
+            _notificationService.TUpdate(value);
             return Ok("Bildirim Güncelleme başarılı");
         }
 
