@@ -25,14 +25,9 @@ namespace Api.Controllers {
 
         [HttpPost]
         public IActionResult CreateTestimonial(CreateTestimonialDto createTestimonialDto) {
-
-            _testimonialService.TAdd(new Testimonial() {
-                Comment = createTestimonialDto.Comment,
-                ImageUrl = createTestimonialDto.ImageUrl,
-                Title = createTestimonialDto.Title,
-                Name = createTestimonialDto.Name,
-                Status = false,
-            });
+            createTestimonialDto.Status = false;
+            var value = _mapper.Map<Testimonial>(createTestimonialDto);
+            _testimonialService.TAdd(value);
             return Ok("Başarıyla eklendi");
         }
 
@@ -45,21 +40,15 @@ namespace Api.Controllers {
 
         [HttpPut]
         public IActionResult UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto) {
-            _testimonialService.TUpdate(new Testimonial() {
-                TestimonialID = updateTestimonialDto.TestimonialID,
-                Comment = updateTestimonialDto.Comment,
-                ImageUrl = updateTestimonialDto.ImageUrl,
-                Title = updateTestimonialDto.Title,
-                Status = updateTestimonialDto.Status,
-                Name = updateTestimonialDto.Name,
-            });
+            var value = _mapper.Map<Testimonial>(updateTestimonialDto);
+            _testimonialService.TUpdate(value);
             return Ok("Başarıyla güncellendi");
         }
 
         [HttpGet("{id}")]
         public IActionResult GetTestimonial(int id) {
             var value = _testimonialService.TGetById(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetTestimonialDto>(value));
         }
     }
 }

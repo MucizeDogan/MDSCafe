@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.Repositories;
+using DtoLayer.PoductDto;
 using EntityLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,10 +20,22 @@ namespace DataAccessLayer.EntityFramework {
             return context.Products.Count();
         }
 
-        public List<Product> GetProductsWithCategories() {
+        public List<ResultProductWithCategory> GetProductsWithCategories() {
+            //var context = new Context();
+            //var values = context.Products.Include(x => x.Category).ToList();
+            //return values;
+
             var context = new Context();
-            var values = context.Products.Include(x => x.Category).ToList();
-            return values;
+            var values = context.Products.Include(x => x.Category).Select(y => new ResultProductWithCategory {
+                Description = y.Description,
+                ImageUrl = y.ImageUrl,
+                Price = y.Price,
+                ProductName = y.ProductName,
+                ProductID = y.ProductID,
+                ProductStatus = y.ProductStatus,
+                CategoryName = y.Category.CategoryName
+            });
+            return values.ToList();
         }
 
         public string LowestPricedProductName() {

@@ -1,4 +1,5 @@
-﻿using EntityLayer.Entities;
+﻿using DtoLayer.PoductDto;
+using EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract {
     public interface IProductDal : IGenericDal<Product> {
-        List<Product> GetProductsWithCategories();
+        List<ResultProductWithCategory> GetProductsWithCategories();
 
         public int CategoryCount();
         int ProductCountByCategoryNameHamburger();
