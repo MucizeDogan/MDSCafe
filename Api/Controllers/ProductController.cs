@@ -105,5 +105,11 @@ namespace Api.Controllers {
         public IActionResult HamburgerAvg() {
             return Ok(_productService.THamburgerAvg());
         }
+        
+        [HttpGet("GetProductsPriceOver50")]
+        public IActionResult GetProductsPriceOver50() {
+            var value = _productService.TGetProductsPriceOver50();
+            return Ok(value);
+        }
     }
 }
