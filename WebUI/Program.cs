@@ -29,6 +29,12 @@ builder.Services.ConfigureApplicationCookie(opts => {
 
 var app = builder.Build();
 
+app.UseStatusCodePages(async context => { // Bu context yukarýdaki context deðil içerikden gelen deðer
+    if (context.HttpContext.Response.StatusCode == 404) {
+        context.HttpContext.Response.Redirect("/Error/NotFound404Page/");
+    }
+});
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {
     app.UseExceptionHandler("/Home/Error");
