@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DtoLayer.ContactMeDto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -18,7 +19,15 @@ namespace WebUI.Controllers {
         }
 
         [HttpGet]
-        public PartialViewResult SendMessage() {
+        public async Task<PartialViewResult> SendMessage() {
+            var client = _httpClientFactory.CreateClient(); // Bir istemci oluşturdum.
+            var res = await client.GetAsync("https://localhost:7052/api/ContactMe"); // İstekte bulunacağımız apinin url sini yazıyoruz
+            if (res.IsSuccessStatusCode) {
+                var jsonData = await res.Content.ReadAsStringAsync(); // json dan gelen içerği string formatta oku
+                var values = JsonConvert.DeserializeObject<ResultContactMeDto>(jsonData); // Json datayı çözüp normal metine dönüştürür(DeserializeObject)
+                ViewBag.Location = values.Location;
+                return PartialView(values);
+            }
             return PartialView();
         }
         [HttpPost]
