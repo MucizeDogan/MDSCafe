@@ -15,19 +15,13 @@ namespace WebUI.Controllers {
             _httpClientFactory = httpClientFactory;
         }
         public IActionResult Index() {
+            
             return View();
         }
 
         [HttpGet]
         public async Task<PartialViewResult> SendMessage() {
-            var client = _httpClientFactory.CreateClient(); // Bir istemci oluşturdum.
-            var res = await client.GetAsync("https://localhost:7052/api/ContactMe"); // İstekte bulunacağımız apinin url sini yazıyoruz
-            if (res.IsSuccessStatusCode) {
-                var jsonData = await res.Content.ReadAsStringAsync(); // json dan gelen içerği string formatta oku
-                var values = JsonConvert.DeserializeObject<ResultContactMeDto>(jsonData); // Json datayı çözüp normal metine dönüştürür(DeserializeObject)
-                ViewBag.Location = values.Location;
-                return PartialView(values);
-            }
+            
             return PartialView();
         }
         [HttpPost]
