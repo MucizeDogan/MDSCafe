@@ -21,17 +21,23 @@ namespace WebUI.Controllers {
         [HttpPost]
         public async Task<IActionResult> Index(CreateBookingDto createBookingDto) {
             var client = _httpClientFactory.CreateClient();
+            createBookingDto.Description = "aaa";
             var jsonData = JsonConvert.SerializeObject(createBookingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            
 
             var res = await client.PostAsync("https://localhost:7052/api/Booking", stringContent);
             if (res.IsSuccessStatusCode) {
                 ViewBag.SuccessMessage = $"Tarih: {createBookingDto.Date.ToShortDateString()}, Kişi Sayısı: {createBookingDto.PersonCount}";
+                return RedirectToAction("Index","Default");
+            } else {
+                var errorContent = await res.Content.ReadAsStringAsync();
+                ModelState.AddModelError(string.Empty, errorContent);
+                ViewBag.ErrorMessage = "Lütfen tekrar deneyiniz.";
                 return View();
             }
 
-            ViewBag.ErrorMessage = "Lütfen tekrar deneyiniz.";
-            return View();
+            
         }
     }
 }

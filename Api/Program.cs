@@ -1,9 +1,12 @@
 using Api.Hubs;
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
+using BusinessLayer.ValidationRules.BookingValidations;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using DtoLayer.BookingDto;
+using FluentValidation;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
@@ -73,6 +76,8 @@ builder.Services.AddScoped<INotificationDal, EfNotificationDal>();
 
 builder.Services.AddScoped<IMessageService, MessageManager>();
 builder.Services.AddScoped<IMessageDal, EfMessageDal>();
+
+builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingValidation>(); // Validasyon için registration iþlemi
 
 //Cycle Was Detected Hatasýnýn çözümü
 //Basket için Include metodu kullanmýþtýk ürün adýna ulaþmak için alt alta bir yapý olarak gelmesi gerekiyordu ama hata alýyorduk bu kod ile istediðimiz yapýya ulaþýyoruz.
