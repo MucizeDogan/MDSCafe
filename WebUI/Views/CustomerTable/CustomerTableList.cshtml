@@ -19,10 +19,10 @@
     }
 
     .container {
-        max-width: 1200px;
+        max-width: 1800px;
         margin: 20px auto;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
     }
 
@@ -37,6 +37,7 @@
         text-align: center;
         font-weight: bold;
         transition: transform 0.2s;
+
     }
 
         .table-card:hover {
@@ -94,11 +95,24 @@
                 status = "BOŞ";
                 icon = "128100";
             }
-        <div class="@statusCard">
+           @*  <a href="/Default/Index" class="@statusCard">
                 <div class="icon">&#@icon;</div>
-            <div>@item.Name</div>
+            <div style="font-size: 24px">@item.Name</div>
             <div>@status</div>
-        </div>
+        </a> *@
+            if (!item.Status) {
+                <a href="/Default/Index" class="@statusCard">
+                    <div class="icon">&#@icon;</div>
+                    <div style="font-size: 24px">@item.Name</div>
+                    <div>@status</div>
+                </a>
+            } else {
+                <div class="@statusCard">
+                    <div class="icon">&#@icon;</div>
+                    <div style="font-size: 24px">@item.Name</div>
+                    <div>@status</div>
+                </div>
+            }
         }
 
 
