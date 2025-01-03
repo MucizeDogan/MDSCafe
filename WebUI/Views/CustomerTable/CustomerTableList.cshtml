@@ -1,0 +1,114 @@
+﻿@model List<ResultCafeTableDto>
+@{
+    Layout = null;
+    string statusCard = "";
+    string status = "";
+    string icon = "";
+
+}
+
+<!DOCTYPE html>
+<html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+    }
+
+    .table-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border-radius: 10px;
+        color: white;
+        text-align: center;
+        font-weight: bold;
+        transition: transform 0.2s;
+    }
+
+        .table-card:hover {
+            transform: scale(1.05);
+        }
+
+        .table-card.full {
+            background-color: red   ;
+        }
+
+        .table-card.empty {
+            background-color: #2ecc71;
+        }
+
+        .table-card .icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
+
+
+@await Component.InvokeAsync("_UILayoutHeadComponentPartial")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_MenuNavbarComponentPartial")
+    <br />
+    <br />
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-dark mb-30">
+                    <a class="breadcrumb-item text-white" href="/Default/Index">Ana Sayfa</a>
+                    <a class="breadcrumb-item text-white" href="/Menu/Index">Masa Listesi</a>
+                    <span class="breadcrumb-item active">Masa Seçimi</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Masa Kartları -->
+        @foreach (var item in Model) {
+            if (item.Status) {
+                statusCard = "table-card full";
+                status = "DOLU";
+                icon = "128722";
+            }else {
+                statusCard = "table-card empty";
+                status = "BOŞ";
+                icon = "128100";
+            }
+        <div class="@statusCard">
+                <div class="icon">&#@icon;</div>
+            <div>@item.Name</div>
+            <div>@status</div>
+        </div>
+        }
+
+
+        <!-- Daha fazla masa kartı eklenebilir -->
+    </div>
+
+    @await Component.InvokeAsync("_UILayoutFooterComponentPartial")
+
+    @await Component.InvokeAsync("_UILAyoutScriptComponentPartial")
+
+</body>
+
+</html>
