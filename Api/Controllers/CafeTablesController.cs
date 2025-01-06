@@ -55,5 +55,17 @@ namespace Api.Controllers {
             var value = _cafeTableService.TGetById(id);
             return Ok(_mapper.Map<GetCafeTableDto>(value));
         }
+
+        [HttpGet("ChangeStatusTableStatusToTrue")]
+        public IActionResult ChangeStatusTableStatusToTrue(int id) {
+            _cafeTableService.TChangeStatusTableStatusToTrue(id);
+            return Ok("Masa Dolu durumuna değiştirildi.");
+        }
+
+        [HttpGet("ChangeStatusTableStatusToFalse")]
+        public IActionResult ChangeStatusTableStatusToFalse(int id) {
+            _cafeTableService.TChangeStatusTableStatusToFalse(id);
+            return Ok("Masa Boş durumuna değiştirildi.");
+        }
     }
 }

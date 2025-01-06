@@ -23,6 +23,14 @@ namespace BusinessLayer.Concrete {
             return _cafeTableDal.CafeTableCount();
         }
 
+        public void TChangeStatusTableStatusToFalse(int id) {
+            _cafeTableDal.ChangeStatusTableStatusToFalse(id);
+        }
+
+        public void TChangeStatusTableStatusToTrue(int id) {
+            _cafeTableDal.ChangeStatusTableStatusToTrue(id);
+        }
+
         public void TDelete(CafeTable entity) {
              _cafeTableDal.Delete(entity);
         }
