@@ -45,9 +45,9 @@ namespace Api.Controllers {
             _basketService.TAdd(new Basket() {
                 ProductID = createBasketDto.ProductID,
                 Count = 1,
-                CafeTableID=1,
+                CafeTableID = createBasketDto.CafeTableID,
                 Price = context.Products.Where(x => x.ProductID == createBasketDto.ProductID).Select(y => y.Price).FirstOrDefault(),
-                TotalPrice = 0
+                TotalPrice = (createBasketDto.Price * createBasketDto.Count)
             });
             return Ok();
         }
