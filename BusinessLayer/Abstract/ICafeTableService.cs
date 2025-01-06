@@ -8,5 +8,7 @@ using System.Threading.Tasks;
 namespace BusinessLayer.Abstract {
     public interface ICafeTableService : IGenericService<CafeTable> {
         int TCafeTableCount();
+        void TChangeStatusTableStatusToTrue(int id); // True ise dolu
+        void TChangeStatusTableStatusToFalse(int id);
     }
 }

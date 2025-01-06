@@ -16,5 +16,23 @@ namespace DataAccessLayer.EntityFramework {
             using var context = new Context();
             return context.CafeTables.Count();
         }
+
+        public void ChangeStatusTableStatusToFalse(int id) {
+            using var context = new Context();
+            var value = context.CafeTables.Where(x => x.CafeTableID == id).FirstOrDefault();
+            if (value != null) {
+                value.Status = false; // Masa boş duruma geçiyor.
+                context.SaveChanges();
+            }
+        }
+
+        public void ChangeStatusTableStatusToTrue(int id) {
+            using var context = new Context();
+            var value = context.CafeTables.Where(x => x.CafeTableID == id).FirstOrDefault();
+            if (value != null) {
+                value.Status = true; // Masa dolu duruma geçiyor.
+                context.SaveChanges();
+            }
+        }
     }
 }
