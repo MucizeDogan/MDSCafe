@@ -14,7 +14,8 @@ namespace WebUI.Controllers {
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> Index() {
+        public async Task<IActionResult> Index(int id) {
+            ViewBag.v = id;
             var client = _httpClientFactory.CreateClient(); // Bir istemci oluşturdum.
             var res = await client.GetAsync("https://localhost:7052/api/Product/ListProductWithCategory"); // İstekte bulunacağımız apinin url sini yazıyoruz
             if (res.IsSuccessStatusCode) {
@@ -26,9 +27,15 @@ namespace WebUI.Controllers {
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBasket(int id) {
-            CreateBasketDto createBasketDto = new CreateBasketDto();
-            createBasketDto.ProductID = id;
+        public async Task<IActionResult> AddBasket(int id, int cafeTableId) {
+            if (cafeTableId == 0 ) {
+                return BadRequest("CafeTableId 0 geliyor.");
+            }
+
+            CreateBasketDto createBasketDto = new CreateBasketDto() {
+                ProductID = id,
+                CafeTableID = cafeTableId
+            };
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBasketDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
