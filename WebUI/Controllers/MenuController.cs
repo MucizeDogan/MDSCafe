@@ -40,6 +40,10 @@ namespace WebUI.Controllers {
             var jsonData = JsonConvert.SerializeObject(createBasketDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var res = await client.PostAsync("https://localhost:7052/api/Basket", stringContent);
+
+            var client2 = _httpClientFactory.CreateClient();
+            await client2.GetAsync("https://localhost:7052/api/CafeTables/ChangeStatusTableStatusToTrue?id=" + cafeTableId);
+
             if (res.IsSuccessStatusCode) {
                 return RedirectToAction("Index");
             }
